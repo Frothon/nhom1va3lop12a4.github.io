@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 Thư Viện Trường Học</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d1117;
+  --bg2: #131920;
+  --bg3: #1a2330;
+  --card: #16202e;
+  --card2: #1c2a3a;
+  --gold: #d4a853;
+  --gold2: #f0c870;
+  --gold3: #fde8a8;
+  --cream: #f5ede0;
+  --text: #e8dfd0;
+  --text2: #a8b8c8;
+  --text3: #5a6e82;
+  --accent: #c47a3a;
+  --accent2: #e0924a;
+  --green: #2d7a5a;
+  --green2: #3daa7a;
+  --red: #7a2d3a;
+  --red2: #c04a5a;
+  --blue: #2a4a8a;
+  --blue2: #3a6ab8;
+  --border: rgba(212,168,83,0.12);
+  --border2: rgba(212,168,83,0.28);
+  --shadow: 0 8px 40px rgba(0,0,0,0.7);
+  --radius: 14px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse 80% 60% at 15% 10%, rgba(42,74,138,0.18) 0%, transparent 55%),
+  radial-gradient(ellipse 60% 50% at 85% 90%, rgba(212,168,83,0.07) 0%, transparent 50%),
+  radial-gradient(ellipse 40% 40% at 50% 50%, rgba(13,17,23,0) 0%, rgba(10,14,20,0.4) 100%);
+pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:0;}
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+#authScreen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:var(--bg);}
+#authScreen::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 60% at 20% 30%, rgba(42,74,138,0.22) 0%, transparent 55%),
+  radial-gradient(ellipse 50% 50% at 80% 70%, rgba(212,168,83,0.08) 0%, transparent 50%);}
+.auth-box{position:relative;background:linear-gradient(160deg,rgba(22,32,46,0.98),rgba(19,25,32,0.98));border:1px solid var(--border2);border-radius:24px;padding:52px 46px;width:430px;max-width:95vw;box-shadow:0 0 100px rgba(42,74,138,0.2),0 0 40px rgba(212,168,83,0.06),var(--shadow);}
+.auth-logo{text-align:center;margin-bottom:34px;}
+.auth-logo .logo-icon{font-size:54px;display:block;margin-bottom:10px;filter:drop-shadow(0 0 24px rgba(212,168,83,0.5));}
+.auth-logo h1{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold2);font-weight:700;letter-spacing:2px;}
+.auth-logo p{font-size:14px;color:var(--text3);margin-top:5px;font-style:italic;font-family:'DM Sans',sans-serif;letter-spacing:0.3px;}
+.auth-tabs{display:flex;gap:2px;background:rgba(13,17,23,0.6);border-radius:12px;padding:4px;margin-bottom:30px;border:1px solid var(--border);}
+.auth-tab{flex:1;padding:10px;text-align:center;border-radius:9px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .3s;font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:0.3px;}
+.auth-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);font-weight:700;box-shadow:0 2px 12px rgba(212,168,83,0.3);}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:11px;color:var(--text3);margin-bottom:7px;font-weight:600;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace;}
+.form-group input,.form-group select{width:100%;padding:12px 16px;background:rgba(13,17,23,0.7);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;transition:border-color .3s,box-shadow .3s;outline:none;}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,168,83,0.12);}
+.form-group select option{background:var(--bg3);}
+.btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;letter-spacing:0.5px;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,0.35);}
+.btn:active{transform:translateY(0);}
+.btn-outline{background:transparent;border:1px solid var(--gold);color:var(--gold);}
+.btn-outline:hover{background:rgba(212,168,83,0.1);}
+.btn-sm{width:auto;padding:7px 16px;font-size:13px;border-radius:8px;}
+.btn-danger{background:linear-gradient(135deg,var(--red),var(--red2));color:white;}
+.btn-danger:hover{box-shadow:0 6px 20px rgba(192,74,90,0.4);}
+.btn-green{background:linear-gradient(135deg,var(--green),var(--green2));color:white;}
+.btn-green:hover{box-shadow:0 6px 20px rgba(61,170,122,0.4);}
+.btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;}
+.demo-hint{margin-top:16px;padding:12px 14px;background:rgba(212,168,83,0.04);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text3);text-align:center;font-family:'DM Sans',sans-serif;line-height:1.7;}
+.demo-hint strong{color:var(--gold2);}
+#authError{color:#f07080;font-size:13px;text-align:center;margin-top:10px;display:none;font-family:'DM Sans',sans-serif;}
+
+/* ====== MAIN APP ====== */
+#app{display:none;min-height:100vh;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,20,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;height:64px;gap:20px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold2);font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap;letter-spacing:1px;}
+.nav-logo span{font-size:24px;}
+.nav-links{display:flex;gap:2px;flex:1;overflow-x:auto;}
+.nav-link{padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13.5px;color:var(--text2);transition:all .3s;white-space:nowrap;display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-weight:500;}
+.nav-link:hover{color:var(--gold2);background:rgba(212,168,83,0.08);}
+.nav-link.active{color:var(--gold);background:rgba(212,168,83,0.12);font-weight:600;}
+.nav-link .badge{background:var(--red2);color:white;font-size:10px;padding:1px 6px;border-radius:10px;font-family:'DM Mono',monospace;}
+.nav-right{display:flex;align-items:center;gap:12px;margin-left:auto;}
+.user-chip{display:flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(22,32,46,0.8);border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:border-color .3s;}
+.user-chip:hover{border-color:var(--border2);}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--accent));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg);font-family:'DM Sans',sans-serif;}
+.user-name{font-size:13.5px;color:var(--text2);font-family:'DM Sans',sans-serif;}
+.admin-badge{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;font-family:'DM Mono',monospace;}
+
+.page{display:none;padding:84px 28px 48px;max-width:1320px;margin:0 auto;position:relative;z-index:1;}
+.page.active{display:block;animation:fadeIn .4s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.page-header{margin-bottom:32px;}
+.page-header h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold2);font-weight:700;letter-spacing:0.5px;}
+.page-header p{color:var(--text3);font-size:15px;margin-top:5px;font-style:italic;font-family:'DM Sans',sans-serif;}
+.page-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px;}
+.stat-card{background:linear-gradient(160deg,var(--card),rgba(22,32,46,0.7));border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;transition:all .3s;}
+.stat-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.4);}
+.stat-icon{font-size:30px;margin-bottom:10px;}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--gold2);font-weight:700;}
+.stat-label{font-size:12px;color:var(--text3);margin-top:2px;font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:0.3px;}
+
+.search-bar{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+.search-input-wrap{flex:1;min-width:220px;position:relative;}
+.search-input-wrap input{width:100%;padding:11px 16px 11px 44px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color .3s;}
+.search-input-wrap input:focus{border-color:var(--gold);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:15px;}
+.filter-select{padding:11px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;cursor:pointer;}
+
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;}
+.book-card{background:linear-gradient(160deg,var(--card),rgba(19,25,32,0.9));border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .35s;cursor:pointer;position:relative;}
+.book-card:hover{transform:translateY(-5px);border-color:var(--border2);box-shadow:0 16px 48px rgba(0,0,0,0.55),0 0 0 1px rgba(212,168,83,0.1);}
+.book-cover{height:160px;display:flex;align-items:center;justify-content:center;font-size:64px;position:relative;overflow:hidden;}
+.book-cover::before{content:'';position:absolute;inset:0;opacity:0.7;}
+.book-cover.cat-0::before{background:linear-gradient(135deg,#1a0812,#3d1530);}
+.book-cover.cat-1::before{background:linear-gradient(135deg,#071520,#0d3040);}
+.book-cover.cat-2::before{background:linear-gradient(135deg,#0e100a,#22280e);}
+.book-cover.cat-3::before{background:linear-gradient(135deg,#100e00,#2a2600);}
+.book-cover.cat-4::before{background:linear-gradient(135deg,#060e20,#102040);}
+.book-cover.cat-5::before{background:linear-gradient(135deg,#180814,#381030);}
+.book-cover.cat-6::before{background:linear-gradient(135deg,#0a0e14,#141e28);}
+.book-cover .emoji{position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.6));}
+.book-cover .cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity .3s;}
+.book-avail-badge{position:absolute;top:8px;right:8px;padding:3px 9px;border-radius:8px;font-size:11px;font-family:'DM Mono',monospace;font-weight:600;}
+.avail-yes{background:rgba(45,122,90,0.85);color:#80ffbe;}
+.avail-no{background:rgba(120,45,58,0.85);color:#ffa0a8;}
+.book-info{padding:14px;}
+.book-title{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text);font-weight:700;line-height:1.35;margin-bottom:4px;}
+.book-author{font-size:12.5px;color:var(--text3);font-style:italic;margin-bottom:8px;font-family:'DM Sans',sans-serif;}
+.book-meta{display:flex;align-items:center;justify-content:space-between;}
+.book-cat{font-size:11px;padding:2px 9px;border-radius:8px;background:rgba(212,168,83,0.08);color:var(--gold);border:1px solid rgba(212,168,83,0.18);font-family:'DM Sans',sans-serif;}
+.book-rating{font-size:12px;color:var(--gold2);font-family:'DM Mono',monospace;}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s;backdrop-filter:blur(4px);}
+.modal{background:linear-gradient(160deg,var(--card2),rgba(16,22,32,0.98));border:1px solid var(--border2);border-radius:22px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 0 100px rgba(0,0,0,0.9),0 0 40px rgba(42,74,138,0.15);}
+.modal-header{padding:28px 28px 0;display:flex;gap:20px;}
+.modal-cover{width:100px;height:130px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:52px;flex-shrink:0;overflow:hidden;position:relative;}
+.modal-cover::before{content:'';position:absolute;inset:0;}
+.modal-book-info{flex:1;}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold2);font-weight:700;line-height:1.3;margin-bottom:6px;}
+.modal-author{font-size:14px;color:var(--text3);font-style:italic;margin-bottom:10px;font-family:'DM Sans',sans-serif;}
+.modal-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.tag{padding:3px 10px;border-radius:8px;font-size:12px;font-family:'DM Sans',sans-serif;}
+.tag-cat{background:rgba(212,168,83,0.1);color:var(--gold);border:1px solid rgba(212,168,83,0.2);}
+.tag-year{background:rgba(45,122,90,0.1);color:#80d4a8;border:1px solid rgba(45,122,90,0.2);}
+.tag-count{background:rgba(42,74,138,0.1);color:#88aaee;border:1px solid rgba(42,74,138,0.2);}
+.modal-stars{font-size:15px;color:var(--gold2);font-family:'DM Mono',monospace;}
+.modal-body{padding:20px 28px;}
+.modal-desc{font-size:15px;line-height:1.85;color:var(--text2);margin-bottom:20px;font-style:italic;border-left:3px solid var(--gold);padding-left:16px;font-family:'DM Sans',sans-serif;}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.modal-footer{padding:0 28px 28px;}
+.reviews-section{margin-top:16px;}
+.reviews-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);margin-bottom:12px;font-weight:600;}
+.review-item{background:rgba(13,17,23,0.6);border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid var(--border);}
+.review-user{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:4px;font-family:'DM Mono',monospace;}
+.review-text{font-size:14px;color:var(--text2);font-family:'DM Sans',sans-serif;line-height:1.6;}
+.review-form{display:flex;gap:8px;margin-top:12px;}
+.review-input{flex:1;padding:10px 14px;background:rgba(13,17,23,0.7);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;}
+.review-input:focus{border-color:var(--gold);}
+
+.borrowed-list{display:flex;flex-direction:column;gap:12px;}
+.borrowed-item{background:linear-gradient(160deg,var(--card),rgba(19,25,32,0.8));border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;gap:16px;transition:all .3s;}
+.borrowed-item:hover{border-color:var(--border2);}
+.bi-cover{width:48px;height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;overflow:hidden;position:relative;}
+.bi-cover::before{content:'';position:absolute;inset:0;}
+.bi-info{flex:1;}
+.bi-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--text);font-weight:700;}
+.bi-author{font-size:13px;color:var(--text3);font-style:italic;font-family:'DM Sans',sans-serif;}
+.bi-date{font-size:12px;font-family:'DM Mono',monospace;margin-top:6px;}
+.date-ok{color:var(--green2);}
+.date-warn{color:#f0c060;}
+.date-over{color:var(--red2);}
+.history-list{display:flex;flex-direction:column;gap:8px;}
+.history-item{background:linear-gradient(160deg,var(--card),rgba(19,25,32,0.8));border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:14px;}
+.history-icon{font-size:18px;}
+.history-info{flex:1;}
+.history-title{color:var(--text);font-weight:600;font-family:'DM Sans',sans-serif;}
+.history-date{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;}
+.history-status{font-size:12px;padding:2px 8px;border-radius:6px;font-family:'DM Mono',monospace;}
+.h-returned{background:rgba(45,122,90,0.15);color:var(--green2);}
+.h-overdue{background:rgba(120,45,58,0.15);color:var(--red2);}
+
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:32px;}
+.admin-card{background:linear-gradient(160deg,var(--card),rgba(19,25,32,0.8));border:1px solid var(--border);border-radius:var(--radius);padding:24px;cursor:pointer;transition:all .3s;text-align:center;}
+.admin-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.admin-card .icon{font-size:36px;margin-bottom:12px;}
+.admin-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold2);margin-bottom:6px;font-weight:700;}
+.admin-card p{font-size:13px;color:var(--text3);font-family:'DM Sans',sans-serif;}
+.table-wrap{background:linear-gradient(160deg,var(--card),rgba(16,22,32,0.9));border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;}
+table{width:100%;border-collapse:collapse;}
+th{background:rgba(10,14,20,0.7);padding:12px 16px;text-align:left;font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;font-family:'DM Mono',monospace;}
+td{padding:12px 16px;border-top:1px solid var(--border);font-size:14px;color:var(--text2);font-family:'DM Sans',sans-serif;}
+tr:hover td{background:rgba(212,168,83,0.025);}
+.status-pill{display:inline-block;padding:2px 10px;border-radius:8px;font-size:12px;font-family:'DM Mono',monospace;}
+.pill-active{background:rgba(45,122,90,0.15);color:var(--green2);}
+.pill-overdue{background:rgba(120,45,58,0.15);color:var(--red2);}
+.pill-admin{background:rgba(212,168,83,0.15);color:var(--gold2);}
+.pill-student{background:rgba(42,74,138,0.15);color:#88aaee;}
+
+.add-book-form{background:linear-gradient(160deg,var(--card),rgba(19,25,32,0.8));border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px;}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.form-group-inline{display:flex;flex-direction:column;gap:6px;}
+.form-group-inline label{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:0.8px;font-family:'DM Mono',monospace;}
+.form-group-inline input,.form-group-inline select,.form-group-inline textarea{padding:10px 14px;background:rgba(13,17,23,0.7);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .3s;}
+.form-group-inline textarea{min-height:80px;resize:vertical;}
+.form-group-inline input:focus,.form-group-inline select:focus,.form-group-inline textarea:focus{border-color:var(--gold);}
+
+.notif-toast{position:fixed;bottom:24px;right:24px;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:500;z-index:9999;animation:slideIn .3s ease,fadeOut .3s ease 2.7s forwards;box-shadow:var(--shadow);font-family:'DM Sans',sans-serif;}
+.notif-success{background:linear-gradient(135deg,#1d5a3a,#2d8a5a);color:#b0ffda;border:1px solid rgba(45,138,90,0.4);}
+.notif-error{background:linear-gradient(135deg,#5a1d2a,#aa3a4a);color:#ffc0c8;border:1px solid rgba(170,58,74,0.4);}
+.notif-info{background:linear-gradient(135deg,#1d2d5a,#3a5aaa);color:#b0c8ff;border:1px solid rgba(58,90,170,0.4);}
+@keyframes slideIn{from{transform:translateX(100px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+@keyframes fadeOut{from{opacity:1;}to{opacity:0;}}
+
+.section-tabs{display:flex;gap:4px;margin-bottom:24px;background:rgba(13,17,23,0.6);padding:4px;border-radius:12px;width:fit-content;border:1px solid var(--border);}
+.stab{padding:8px 18px;border-radius:9px;cursor:pointer;font-size:13.5px;color:var(--text2);transition:all .3s;font-family:'DM Sans',sans-serif;font-weight:500;}
+.stab.active{background:linear-gradient(135deg,rgba(212,168,83,0.15),rgba(240,200,112,0.08));color:var(--gold2);box-shadow:0 2px 12px rgba(0,0,0,0.4);border:1px solid rgba(212,168,83,0.2);}
+
+.prog-bar{height:7px;background:rgba(13,17,23,0.8);border-radius:4px;overflow:hidden;margin-top:4px;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+
+.profile-card{background:linear-gradient(160deg,var(--card),rgba(19,25,32,0.8));border:1px solid var(--border);border-radius:var(--radius);padding:32px;}
+.profile-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--accent));display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;color:var(--bg);margin:0 auto 16px;font-family:'DM Sans',sans-serif;box-shadow:0 8px 24px rgba(212,168,83,0.3);}
+.profile-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold2);text-align:center;margin-bottom:4px;font-weight:700;}
+.profile-role{text-align:center;margin-bottom:24px;}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ps-item{background:rgba(13,17,23,0.5);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.ps-val{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold2);font-weight:700;}
+.ps-key{font-size:12px;color:var(--text3);margin-top:2px;font-family:'DM Sans',sans-serif;}
+
+.challenge-card{background:linear-gradient(135deg,rgba(22,32,46,0.95),rgba(42,74,138,0.1));border:1px solid var(--border2);border-radius:var(--radius);padding:24px;margin-bottom:24px;}
+.challenge-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold2);margin-bottom:6px;font-weight:700;}
+.challenge-sub{font-size:13px;color:var(--text3);margin-bottom:16px;font-family:'DM Sans',sans-serif;}
+
+.rec-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;}
+.rec-card{background:linear-gradient(160deg,var(--card),rgba(19,25,32,0.85));border:1px solid var(--border);border-radius:var(--radius);padding:16px;min-width:160px;max-width:160px;cursor:pointer;transition:all .3s;flex-shrink:0;}
+.rec-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+.rec-emoji{font-size:36px;margin-bottom:8px;display:block;}
+.rec-title{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--text);font-weight:700;line-height:1.3;margin-bottom:4px;}
+.rec-author{font-size:12px;color:var(--text3);font-style:italic;font-family:'DM Sans',sans-serif;}
+
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold2);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:700;}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent);}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--text3);}
+.empty-state .icon{font-size:48px;margin-bottom:12px;}
+.empty-state p{font-size:16px;font-style:italic;font-family:'DM Sans',sans-serif;}
+
+.wishlist-btn{position:absolute;top:8px;left:8px;font-size:18px;cursor:pointer;z-index:2;transition:transform .2s;}
+.wishlist-btn:hover{transform:scale(1.3);}
+
+.overdue-alert{background:rgba(120,45,58,0.1);border:1px solid rgba(192,74,90,0.25);border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:10px;font-size:14px;color:#f0b0b8;font-family:'DM Sans',sans-serif;}
+
+/* PDF MODAL */
+#pdfModal{position:fixed;inset:0;background:rgba(5,8,14,0.95);z-index:600;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding:16px 20px 20px;backdrop-filter:blur(10px);}
+#pdfModal.open{display:flex;animation:fadeIn .25s ease;}
+.pdf-modal-header{width:100%;max-width:820px;display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.pdf-modal-title{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--gold2);font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.pdf-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.pdf-ctrl-btn{padding:6px 13px;background:rgba(22,32,46,0.95);border:1px solid var(--border2);border-radius:8px;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px;}
+.pdf-ctrl-btn:hover{background:rgba(212,168,83,0.12);color:var(--gold2);border-color:var(--gold);}
+.pdf-ctrl-btn:disabled{opacity:0.35;cursor:not-allowed;pointer-events:none;}
+.pdf-page-info{font-family:'DM Mono',monospace;font-size:13px;color:var(--text3);padding:6px 11px;background:rgba(13,17,23,0.9);border:1px solid var(--border);border-radius:8px;white-space:nowrap;}
+.pdf-canvas-wrap{width:100%;max-width:820px;background:rgba(13,17,23,0.6);border:1px solid var(--border2);border-radius:16px;overflow:auto;display:flex;align-items:flex-start;justify-content:center;flex:1;padding:16px;position:relative;}
+#pdfCanvas{display:block;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.7);}
+.pdf-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:15px;gap:14px;background:rgba(13,17,23,0.4);}
+.pdf-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.pdf-no-preview{text-align:center;padding:60px 30px;color:var(--text3);width:100%;}
+.pdf-no-preview .icon{font-size:48px;margin-bottom:14px;}
+.pdf-no-preview p{font-size:15px;font-family:'DM Sans',sans-serif;font-style:italic;line-height:1.7;}
+.pdf-zoom-val{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);width:40px;text-align:center;}
+.pdf-btn{padding:6px 14px;background:rgba(22,32,46,0.95);border:1px solid var(--border2);border-radius:8px;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .2s;}
+.pdf-btn:hover{background:rgba(212,168,83,0.12);color:var(--gold2);}
+.pdf-btn:disabled{opacity:0.35;cursor:not-allowed;}
+</style>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <span class="logo-icon">📚</span>
+      <h1>THƯ VIỆN TRƯỜNG HỌC</h1>
+      <p>Tri Thức Là Sức Mạnh</p>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="switchAuthTab('login')">Đăng Nhập</div>
+      <div class="auth-tab" onclick="switchAuthTab('register')">Đăng Ký</div>
+    </div>
+    <div id="loginForm">
+      <div class="form-group">
+        <label>Tên Đăng Nhập</label>
+        <input type="text" id="loginEmail" placeholder="Tên đăng nhập hoặc email" value="admin">
+      </div>
+      <div class="form-group">
+        <label>Mật Khẩu</label>
+        <input type="password" id="loginPass" placeholder="••••••••" value="123">
+      </div>
+      <button class="btn" onclick="doLogin()">🔓 Đăng Nhập</button>
+      <div class="demo-hint">
+        <strong>Admin:</strong> admin / 123<br>
+        <strong>Học sinh:</strong> student / student123
+      </div>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="form-group">
+        <label>Họ và Tên</label>
+        <input type="text" id="regName" placeholder="Nguyễn Văn A">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="email@truong.edu.vn">
+      </div>
+      <div class="form-group">
+        <label>Mật Khẩu</label>
+        <input type="password" id="regPass" placeholder="Tối thiểu 6 ký tự">
+      </div>
+      <div class="form-group">
+        <label>Lớp / Khối</label>
+        <input type="text" id="regClass" placeholder="VD: 10A1, 11B2...">
+      </div>
+      <button class="btn" onclick="doRegister()">✨ Tạo Tài Khoản</button>
+    </div>
+    <div id="authError"></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <nav>
+    <div class="nav-logo"><span>📚</span> THƯ VIỆN</div>
+    <div class="nav-links">
+      <div class="nav-link active" onclick="showPage('home')" id="nav-home">🏠 Trang Chủ</div>
+      <div class="nav-link" onclick="showPage('catalog')" id="nav-catalog">📖 Danh Mục</div>
+      <div class="nav-link" onclick="showPage('mybooks')" id="nav-mybooks">🎒 Sách Của Tôi <span class="badge" id="borrowBadge" style="display:none">0</span></div>
+      <div class="nav-link" onclick="showPage('wishlist')" id="nav-wishlist">❤️ Yêu Thích</div>
+      <div class="nav-link" onclick="showPage('profile')" id="nav-profile">👤 Cá Nhân</div>
+      <div class="nav-link" id="nav-admin" onclick="showPage('admin')" style="display:none">⚙️ Quản Lý</div>
+    </div>
+    <div class="nav-right">
+      <div class="user-chip" onclick="showPage('profile')">
+        <div class="user-avatar" id="navAvatar">?</div>
+        <span class="user-name" id="navName">...</span>
+        <span class="admin-badge" id="navAdminBadge" style="display:none">ADMIN</span>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="doLogout()">Thoát</button>
+    </div>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="page-home">
+    <div id="overdueAlert" style="display:none" class="overdue-alert">
+      ⚠️ <span id="overdueMsg"></span>
+    </div>
+    <div class="page-header">
+      <h2 id="homeGreeting">Chào mừng!</h2>
+      <p>Khám phá kho tàng tri thức hôm nay 📖</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-val" id="hs-total">0</div><div class="stat-label">Tổng Sách</div></div>
+      <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-val" id="hs-avail">0</div><div class="stat-label">Sách Có Sẵn</div></div>
+      <div class="stat-card"><div class="stat-icon">📤</div><div class="stat-val" id="hs-borrowed">0</div><div class="stat-label">Đang Mượn</div></div>
+      <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-val" id="hs-users">0</div><div class="stat-label">Thành Viên</div></div>
+    </div>
+    <div class="challenge-card">
+      <div class="challenge-title">🏆 Thử Thách Đọc Sách Năm Nay</div>
+      <div class="challenge-sub">Mục tiêu: Đọc 20 cuốn sách trong năm học</div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="prog-bar" style="flex:1"><div class="prog-fill" id="challengeBar" style="width:0%"></div></div>
+        <span id="challengeText" style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold2)">0/20</span>
+      </div>
+    </div>
+    <div class="sec-title">💡 Gợi Ý Cho Bạn</div>
+    <div class="rec-scroll" id="recBooks"></div>
+    <br>
+    <div class="sec-title">🔥 Sách Phổ Biến Nhất</div>
+    <div class="rec-scroll" id="popularBooks"></div>
+    <br>
+    <div class="sec-title">🆕 Mới Thêm Gần Đây</div>
+    <div class="rec-scroll" id="newBooks"></div>
+  </div>
+
+  <!-- CATALOG PAGE -->
+  <div class="page" id="page-catalog">
+    <div class="page-header-row">
+      <div class="page-header">
+        <h2>📖 Danh Mục Sách</h2>
+        <p>Tìm kiếm và khám phá hàng trăm đầu sách</p>
+      </div>
+    </div>
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Tìm theo tên sách, tác giả..." id="searchInput" oninput="renderBooks()">
+      </div>
+      <select class="filter-select" id="catFilter" onchange="renderBooks()">
+        <option value="">Tất cả thể loại</option>
+        <option>Văn học</option><option>Khoa học</option><option>Lịch sử</option>
+        <option>Toán học</option><option>Kỹ năng sống</option><option>Thiếu nhi</option><option>Triết học</option>
+      </select>
+      <select class="filter-select" id="availFilter" onchange="renderBooks()">
+        <option value="">Tất cả</option>
+        <option value="yes">Còn sách</option>
+        <option value="no">Hết sách</option>
+      </select>
+      <select class="filter-select" id="sortFilter" onchange="renderBooks()">
+        <option value="default">Mặc định</option>
+        <option value="rating">Đánh giá cao</option>
+        <option value="az">A → Z</option>
+        <option value="avail">Còn nhiều nhất</option>
+      </select>
+    </div>
+    <div class="books-grid" id="booksGrid"></div>
+  </div>
+
+  <!-- MY BOOKS PAGE -->
+  <div class="page" id="page-mybooks">
+    <div class="page-header">
+      <h2>🎒 Sách Của Tôi</h2>
+      <p>Quản lý sách đang mượn và lịch sử đọc sách</p>
+    </div>
+    <div class="section-tabs">
+      <div class="stab active" onclick="switchMyTab('borrowing')">📤 Đang Mượn</div>
+      <div class="stab" onclick="switchMyTab('history')">📋 Lịch Sử</div>
+      <div class="stab" onclick="switchMyTab('stats')">📊 Thống Kê</div>
+    </div>
+    <div id="tab-borrowing"><div class="borrowed-list" id="borrowedList"></div></div>
+    <div id="tab-history" style="display:none"><div class="history-list" id="historyList"></div></div>
+    <div id="tab-stats" style="display:none"><div class="stats-grid" id="myStats"></div></div>
+  </div>
+
+  <!-- WISHLIST PAGE -->
+  <div class="page" id="page-wishlist">
+    <div class="page-header">
+      <h2>❤️ Sách Yêu Thích</h2>
+      <p>Danh sách sách bạn muốn đọc</p>
+    </div>
+    <div class="books-grid" id="wishlistGrid"></div>
+  </div>
+
+  <!-- PROFILE PAGE -->
+  <div class="page" id="page-profile">
+    <div class="page-header">
+      <h2>👤 Trang Cá Nhân</h2>
+      <p>Thông tin và thống kê của bạn</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap;">
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar">?</div>
+        <div class="profile-name" id="profileName">...</div>
+        <div class="profile-role"><span class="status-pill" id="profileRole">...</span></div>
+        <div style="font-size:14px;color:var(--text3);text-align:center;margin-bottom:20px;" id="profileEmail">...</div>
+        <div class="profile-stats" id="profileStats"></div>
+      </div>
+      <div>
+        <div class="sec-title" style="margin-bottom:16px;">⚙️ Đổi Mật Khẩu</div>
+        <div class="add-book-form">
+          <div class="form-group-inline" style="margin-bottom:12px;">
+            <label>Mật khẩu hiện tại</label>
+            <input type="password" id="oldPass" placeholder="••••••••">
+          </div>
+          <div class="form-group-inline" style="margin-bottom:12px;">
+            <label>Mật khẩu mới</label>
+            <input type="password" id="newPass" placeholder="••••••••">
+          </div>
+          <div class="form-group-inline" style="margin-bottom:16px;">
+            <label>Xác nhận mật khẩu mới</label>
+            <input type="password" id="confirmPass" placeholder="••••••••">
+          </div>
+          <button class="btn btn-sm" style="width:100%" onclick="changePassword()">🔐 Cập Nhật Mật Khẩu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div class="page" id="page-admin">
+    <div class="page-header">
+      <h2>⚙️ Quản Lý Thư Viện</h2>
+      <p>Dành cho quản trị viên thư viện</p>
+    </div>
+    <div class="section-tabs">
+      <div class="stab active" onclick="switchAdminTab('overview')">📊 Tổng Quan</div>
+      <div class="stab" onclick="switchAdminTab('books')">📚 Quản Lý Sách</div>
+      <div class="stab" onclick="switchAdminTab('borrows')">📤 Mượn / Trả</div>
+      <div class="stab" onclick="switchAdminTab('users')">👥 Người Dùng</div>
+    </div>
+    <div id="atab-overview">
+      <div class="stats-grid" id="adminStats"></div>
+      <div class="sec-title">📋 Sách Quá Hạn</div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Người mượn</th><th>Sách</th><th>Ngày mượn</th><th>Hạn trả</th><th>Quá hạn</th><th>Thao tác</th></tr></thead>
+        <tbody id="overdueTable"></tbody></table>
+      </div>
+      <div class="sec-title">📈 Sách Mượn Nhiều Nhất</div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Tên sách</th><th>Tác giả</th><th>Lượt mượn</th><th>Đang có sẵn</th></tr></thead>
+        <tbody id="popularTable"></tbody></table>
+      </div>
+    </div>
+    <div id="atab-books" style="display:none">
+      <div class="add-book-form">
+        <div class="sec-title" style="margin-bottom:16px;" id="addBookFormTitle">➕ Thêm Sách Mới</div>
+        <div class="form-grid">
+          <div class="form-group-inline"><label>Tên Sách *</label><input type="text" id="bTitle" placeholder="Tên sách"></div>
+          <div class="form-group-inline"><label>Tác Giả *</label><input type="text" id="bAuthor" placeholder="Tên tác giả"></div>
+          <div class="form-group-inline"><label>Thể Loại</label>
+            <select id="bCat"><option>Văn học</option><option>Khoa học</option><option>Lịch sử</option>
+            <option>Toán học</option><option>Kỹ năng sống</option><option>Thiếu nhi</option><option>Triết học</option></select>
+          </div>
+          <div class="form-group-inline"><label>Năm Xuất Bản</label><input type="number" id="bYear" placeholder="2024" min="1900" max="2025"></div>
+          <div class="form-group-inline"><label>Số Lượng</label><input type="number" id="bTotal" placeholder="5" min="1"></div>
+          <div class="form-group-inline"><label>Biểu Tượng (emoji)</label><input type="text" id="bEmoji" placeholder="📕" maxlength="4"></div>
+        </div>
+        <div class="form-group-inline" style="margin-top:12px;"><label>Mô Tả</label>
+          <textarea id="bDesc" placeholder="Tóm tắt nội dung sách..."></textarea>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+          <button class="btn btn-sm" onclick="saveBook()">💾 Lưu Sách</button>
+          <button class="btn btn-sm btn-outline" onclick="clearBookForm()" id="cancelEditBtn" style="display:none">✕ Hủy</button>
+        </div>
+        <input type="hidden" id="editBookId">
+      </div>
+      <div class="sec-title">📚 Danh Sách Sách (<span id="bookCount">0</span>)</div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Sách</th><th>Tác giả</th><th>Thể loại</th><th>Tổng SL</th><th>Còn lại</th><th>Lượt mượn</th><th>Thao tác</th></tr></thead>
+        <tbody id="adminBooksTable"></tbody></table>
+      </div>
+    </div>
+    <div id="atab-borrows" style="display:none">
+      <div class="sec-title">📤 Đang Mượn (<span id="borrowCount">0</span>)</div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Người mượn</th><th>Lớp</th><th>Sách</th><th>Ngày mượn</th><th>Hạn trả</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+        <tbody id="adminBorrowsTable"></tbody></table>
+      </div>
+      <div class="sec-title">📋 Lịch Sử Mượn Trả</div>
+      <div class="table-wrap" style="max-height:400px;overflow-y:auto">
+        <table><thead><tr><th>Người mượn</th><th>Sách</th><th>Mượn</th><th>Trả</th><th>Tình trạng</th></tr></thead>
+        <tbody id="adminHistoryTable"></tbody></table>
+      </div>
+    </div>
+    <div id="atab-users" style="display:none">
+      <div class="table-wrap">
+        <table><thead><tr><th>Tên</th><th>Email</th><th>Lớp</th><th>Vai trò</th><th>Đang mượn</th><th>Tổng đã mượn</th><th>Thao tác</th></tr></thead>
+        <tbody id="adminUsersTable"></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK MODAL -->
+<div id="bookModal" style="display:none" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-cover" id="mCover"></div>
+      <div class="modal-book-info">
+        <div class="modal-title" id="mTitle"></div>
+        <div class="modal-author" id="mAuthor"></div>
+        <div class="modal-tags" id="mTags"></div>
+        <div class="modal-stars" id="mStars"></div>
+        <div style="margin-top:8px;font-size:13px;" id="mAvailText"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc" id="mDesc"></div>
+      <div class="modal-actions" id="mActions"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="reviews-section">
+        <div class="reviews-title">💬 Nhận Xét Của Độc Giả</div>
+        <div id="mReviews"></div>
+        <div class="review-form">
+          <input class="review-input" id="reviewInput" placeholder="Chia sẻ cảm nhận của bạn..." maxlength="200">
+          <button class="btn btn-sm" onclick="submitReview()">Gửi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PDF MODAL -->
+<div id="pdfModal">
+  <div style="width:100%;max-width:820px;display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+    <div id="pdfModalTitle" style="font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--gold2);font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">📄 Xem trước sách</div>
+    <button class="pdf-btn" onclick="pdfDownload()">⬇️ Tải PDF</button>
+    <button class="pdf-btn" onclick="closePdfModal()">✕ Đóng</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap;">
+    <button class="pdf-btn" id="pdfPrevBtn" onclick="pdfPrevPage()">◀ Trang trước</button>
+    <span id="pdfPageInfo" style="font-family:'DM Mono',monospace;font-size:13px;color:var(--text3);padding:6px 11px;background:rgba(13,17,23,0.9);border:1px solid var(--border);border-radius:8px;">— / —</span>
+    <button class="pdf-btn" id="pdfNextBtn" onclick="pdfNextPage()">Trang sau ▶</button>
+    <div style="flex:1"></div>
+    <button class="pdf-btn" onclick="pdfZoom(-0.2)">🔍−</button>
+    <span id="pdfZoomVal" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);width:40px;text-align:center;">120%</span>
+    <button class="pdf-btn" onclick="pdfZoom(0.2)">🔍+</button>
+  </div>
+  <div class="pdf-canvas-wrap" id="pdfCanvasWrap">
+    <div class="pdf-loading" id="pdfLoading" style="display:none"><div class="pdf-spinner"></div><span>Đang tải PDF...</span></div>
+    <canvas id="pdfCanvas" style="display:none"></canvas>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+// =================== DATA ===================
+const CAT_MAP = {'Văn học':0,'Khoa học':1,'Lịch sử':2,'Toán học':3,'Kỹ năng sống':4,'Thiếu nhi':5,'Triết học':6};
+function getCatClass(cat){ return 'cat-'+(CAT_MAP[cat]!==undefined?CAT_MAP[cat]:0); }
+
+function coverHtml(b){
+  if(b.cover){
+    return `<span class="emoji" style="position:relative;z-index:1;opacity:0.3">${b.emoji}</span>
+    <img class="cover-img" src="${b.cover}" alt="${b.title}" loading="lazy"
+      onload="this.style.opacity=1;this.previousElementSibling.style.opacity=0"
+      onerror="this.remove();this.previousElementSibling.style.opacity=1"
+      style="opacity:0;transition:opacity .4s;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2">`;
+  }
+  return `<span class="emoji" style="position:relative;z-index:1">${b.emoji}</span>`;
+}
+
+function initData(){
+  const _b=ls('books'); if(_b&&_b[0]&&!('cover' in _b[0])) localStorage.removeItem('books');
+  if(!ls('books')){
+    const OL='https://covers.openlibrary.org/b/isbn/';
+    const books=[
+      {id:1,title:'Dế Mèn Phiêu Lưu Ký',author:'Tô Hoài',cat:'Văn học',year:1941,total:5,available:4,emoji:'🦗',cover:null,desc:'Câu chuyện phiêu lưu kỳ thú của chú dế mèn kiêu ngạo học cách sống khiêm tốn và nhân ái qua nhiều cuộc hành trình đầy màu sắc.',rating:4.8,reviews:[{user:'An Nguyễn',text:'Cuốn sách tuổi thơ tuyệt vời nhất!'}],borrowCount:45},
+      {id:2,title:'Số Đỏ',author:'Vũ Trọng Phụng',cat:'Văn học',year:1936,total:3,available:1,emoji:'📰',cover:null,desc:'Tiểu thuyết trào phúng nổi tiếng về xã hội Việt Nam thời thuộc địa, theo chân nhân vật Xuân tóc đỏ leo thang xã hội bằng những trò bịp bợm.',rating:4.7,reviews:[],borrowCount:38},
+      {id:3,title:'Vũ Trụ Trong Vỏ Hạt Dẻ',author:'Stephen Hawking',cat:'Khoa học',year:2001,total:2,available:2,emoji:'🌌',cover:OL+'9780553802023-M.jpg',desc:'Stephen Hawking dẫn dắt người đọc qua những bí ẩn vũ trụ từ thuyết tương đối đến cơ học lượng tử bằng ngôn ngữ đơn giản và sinh động.',rating:4.9,reviews:[{user:'Minh Tuấn',text:'Khoa học mà đọc mê say như tiểu thuyết!'}],borrowCount:52},
+      {id:4,title:'Lịch Sử Văn Minh Nhân Loại',author:'Will Durant',cat:'Lịch sử',year:1935,total:2,available:0,emoji:'🏛️',cover:null,desc:'Bộ sách đồ sộ truy tìm hành trình phát triển của nền văn minh loài người từ thời tiền sử đến thế kỷ 20.',rating:4.6,reviews:[],borrowCount:29},
+      {id:5,title:'Tư Duy Nhanh Và Chậm',author:'Daniel Kahneman',cat:'Kỹ năng sống',year:2011,total:4,available:3,emoji:'🧠',cover:OL+'9780374533557-M.jpg',desc:'Khám phá cách bộ não hoạt động qua hai hệ thống tư duy: nhanh (bản năng) và chậm (phân tích), giúp bạn đưa ra quyết định tốt hơn.',rating:4.8,reviews:[{user:'Linh Phạm',text:'Thay đổi cách mình nhìn về quyết định hàng ngày.'}],borrowCount:67},
+      {id:6,title:'Toán Học Vui',author:'Martin Gardner',cat:'Toán học',year:1959,total:3,available:3,emoji:'🔢',cover:null,desc:'Tập hợp những câu đố toán học thú vị và các nghịch lý kỳ lạ làm say mê hàng triệu người trên toàn thế giới.',rating:4.5,reviews:[],borrowCount:21},
+      {id:7,title:'Harry Potter và Hòn Đá Phù Thủy',author:'J.K. Rowling',cat:'Văn học',year:1997,total:5,available:2,emoji:'⚡',cover:OL+'9780747532743-M.jpg',desc:'Cậu bé Harry Potter bước vào thế giới ma thuật huyền bí của trường Hogwarts, bắt đầu hành trình trở thành phù thủy vĩ đại.',rating:4.9,reviews:[{user:'Hà Trần',text:'Đọc lần thứ 5 vẫn hay!'}],borrowCount:89},
+      {id:8,title:'Nhà Giả Kim',author:'Paulo Coelho',cat:'Văn học',year:1988,total:4,available:4,emoji:'✨',cover:OL+'9780062315007-M.jpg',desc:'Câu chuyện về Santiago, chàng chăn cừu người Tây Ban Nha theo đuổi giấc mơ tìm kiếm kho báu và khám phá ý nghĩa cuộc sống.',rating:4.7,reviews:[{user:'Quân Lê',text:'Sách làm mình tin vào ước mơ của bản thân.'}],borrowCount:73},
+      {id:9,title:'Sapiens: Lược Sử Loài Người',author:'Yuval Noah Harari',cat:'Lịch sử',year:2011,total:3,available:1,emoji:'🦴',cover:OL+'9780062316097-M.jpg',desc:'Hành trình 70.000 năm của loài người từ vượn người đến thống trị địa cầu, kể qua lăng kính khoa học đa chiều.',rating:4.8,reviews:[],borrowCount:61},
+      {id:10,title:'Đắc Nhân Tâm',author:'Dale Carnegie',cat:'Kỹ năng sống',year:1936,total:6,available:5,emoji:'🤝',cover:OL+'9780671027032-M.jpg',desc:'Cuốn sách kinh điển về nghệ thuật giao tiếp và ảnh hưởng người khác, đã bán hàng triệu bản trên toàn thế giới.',rating:4.6,reviews:[{user:'Nga Võ',text:'Áp dụng được ngay vào cuộc sống!'}],borrowCount:95},
+      {id:11,title:'Chiến Tranh Và Hòa Bình',author:'Leo Tolstoy',cat:'Văn học',year:1869,total:2,available:2,emoji:'⚔️',cover:OL+'9780307266934-M.jpg',desc:'Sử thi vĩ đại về nước Nga thời Napoléon, theo dõi số phận nhiều gia đình qua giai đoạn lịch sử biến động.',rating:4.5,reviews:[],borrowCount:18},
+      {id:12,title:'Lược Sử Vạn Vật',author:'Bill Bryson',cat:'Khoa học',year:2003,total:2,available:2,emoji:'🌍',cover:OL+'9780767908177-M.jpg',desc:'Hành trình khám phá Trái Đất từ lòng đất đến tầng khí quyển, từ vi khuẩn đến khủng long qua giọng văn hài hước.',rating:4.6,reviews:[],borrowCount:33},
+      {id:13,title:'Tuổi Thơ Dữ Dội',author:'Phùng Quán',cat:'Văn học',year:1986,total:3,available:3,emoji:'🎖️',cover:null,desc:'Câu chuyện cảm động về những thiếu niên dũng cảm tham gia kháng chiến trong thời kỳ đầu của cuộc chiến tranh chống Pháp.',rating:4.7,reviews:[],borrowCount:27},
+      {id:14,title:'1984',author:'George Orwell',cat:'Văn học',year:1949,total:3,available:1,emoji:'👁️',cover:OL+'9780451524935-M.jpg',desc:'Tiểu thuyết dystopia kinh điển về xã hội toàn trị nơi Đảng kiểm soát mọi suy nghĩ và hành động của con người.',rating:4.8,reviews:[{user:'Khoa Bùi',text:'Đáng sợ và đáng suy nghĩ!'}],borrowCount:55},
+      {id:15,title:'Nhật Ký Anne Frank',author:'Anne Frank',cat:'Lịch sử',year:1947,total:3,available:2,emoji:'✍️',cover:OL+'9780553296983-M.jpg',desc:'Nhật ký của cô bé người Do Thái Anne Frank trong 2 năm trốn chạy Phát xít Đức, một trong những tài liệu lịch sử cảm động nhất.',rating:4.8,reviews:[],borrowCount:49},
+      {id:16,title:'Thiện, Ác Và Smartphone',author:'Đặng Hoàng Giang',cat:'Kỹ năng sống',year:2017,total:3,available:3,emoji:'📱',cover:null,desc:'Phân tích sâu sắc về văn hóa mạng xã hội tại Việt Nam và tác động của công nghệ đến đạo đức và lối sống.',rating:4.5,reviews:[],borrowCount:41},
+      {id:17,title:'Truyện Kiều',author:'Nguyễn Du',cat:'Văn học',year:1820,total:4,available:4,emoji:'🌸',cover:null,desc:'Kiệt tác văn học cổ điển Việt Nam kể về cuộc đời đầy thăng trầm của nàng Kiều tài sắc vẹn toàn.',rating:4.9,reviews:[{user:'Mai Ngô',text:'Đỉnh cao văn học Việt Nam mọi thời đại.'}],borrowCount:44},
+      {id:18,title:'Sống Đẹp',author:'Lin Yutang',cat:'Triết học',year:1937,total:2,available:2,emoji:'🍃',cover:null,desc:'Triết lý sống hài hòa của người Trung Hoa kết hợp với quan điểm phương Tây về nghệ thuật tận hưởng cuộc đời.',rating:4.4,reviews:[],borrowCount:23},
+      {id:19,title:'Tắt Đèn',author:'Ngô Tất Tố',cat:'Văn học',year:1939,total:3,available:2,emoji:'🌙',cover:null,desc:'Tiểu thuyết hiện thực về số phận bi thảm của người nông dân Việt Nam dưới chế độ thực dân phong kiến.',rating:4.5,reviews:[],borrowCount:31},
+      {id:20,title:'Thám Tử Lừng Danh Conan',author:'Gosho Aoyama',cat:'Thiếu nhi',year:1994,total:8,available:6,emoji:'🔍',cover:null,desc:'Bộ truyện tranh hình sự nổi tiếng về cậu bé thám tử Conan giải quyết hàng trăm vụ án bí ẩn.',rating:4.8,reviews:[{user:'Bi Trần',text:'Nghiện không thể dứt được!'}],borrowCount:102},
+      {id:21,title:'Hoàng Tử Bé',author:'Antoine de Saint-Exupéry',cat:'Văn học',year:1943,total:4,available:3,emoji:'🌹',cover:OL+'9780156012195-M.jpg',desc:'Câu chuyện triết lý nhân văn về hoàng tử bé đến từ hành tinh khác, dạy chúng ta nhìn cuộc sống bằng đôi mắt trẻ thơ.',rating:4.9,reviews:[{user:'Hoa Lê',text:'Đọc lúc nào cũng thấy ý nghĩa mới.'}],borrowCount:78},
+      {id:22,title:'Đắc Nhân Tâm',author:'Dale Carnegie',cat:'Kỹ năng sống',year:1936,total:6,available:5,emoji:'🤝',cover:OL+'9780671027032-M.jpg',desc:'Nghệ thuật giao tiếp và tạo ảnh hưởng - phiên bản 2.',rating:4.6,reviews:[],borrowCount:88},
+      {id:23,title:'Sapiens',author:'Yuval Noah Harari',cat:'Lịch sử',year:2015,total:3,available:2,emoji:'🌐',cover:OL+'9780062316097-M.jpg',desc:'Lược sử loài người từ thời đồ đá đến kỷ nguyên số.',rating:4.8,reviews:[],borrowCount:65},
+      {id:24,title:'Toán Học Và Cuộc Sống',author:'John Allen Paulos',cat:'Toán học',year:1988,total:2,available:2,emoji:'📐',cover:null,desc:'Tác giả chỉ ra cách tư duy toán học giúp chúng ta hiểu rõ hơn về thế giới xung quanh và tránh những sai lầm phổ biến.',rating:4.3,reviews:[],borrowCount:12},
+      {id:25,title:'Nhà Giả Kim - Bìa Đặc Biệt',author:'Paulo Coelho',cat:'Văn học',year:2014,total:2,available:1,emoji:'🔮',cover:OL+'9780062315007-M.jpg',desc:'Phiên bản kỷ niệm 25 năm với bìa đặc biệt và phụ lục thú vị.',rating:4.7,reviews:[],borrowCount:34},
+    ];
+    ls('books', books);
+  }
+  // Migration: reset users nếu dùng email cũ
+  const _u=ls('users');
+  if(_u&&_u[0]&&(_u[0].email==='admin@library.com'||!_u[0].pass)) localStorage.removeItem('users');
+  if(!ls('users')){
+    const users=[
+      {id:1,name:'admin',email:'admin',pass:'123',role:'admin',classRoom:'Ban Giám Hiệu',borrowedBooks:[],history:[]},
+      {id:2,name:'Nguyễn Học Sinh',email:'student',pass:'student123',role:'student',classRoom:'10A1',borrowedBooks:[],history:[]},
+    ];
+    ls('users', users);
+  }
+  if(!ls('borrowRecords')) ls('borrowRecords',[]);
+}
+
+function ls(k, v){
+  if(v===undefined){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } }
+  localStorage.setItem(k, JSON.stringify(v));
+}
+
+// =================== AUTH ===================
+let currentUser = null;
+let selectedBookId = null;
+
+function switchAuthTab(tab){
+  document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='login'?0:1)));
+  document.getElementById('loginForm').style.display = tab==='login'?'block':'none';
+  document.getElementById('registerForm').style.display = tab==='register'?'block':'none';
+  document.getElementById('authError').style.display='none';
+}
+
+function doLogin(){
+  const input = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  const users = ls('users')||[];
+  const user = users.find(u=>
+    (u.email.toLowerCase()===input || u.name.toLowerCase()===input) && u.pass===pass
+  );
+  if(!user){ showAuthError('Tên đăng nhập hoặc mật khẩu không đúng!'); return; }
+  currentUser = JSON.parse(JSON.stringify(user)); // ✅ deep copy tránh mutation bug
+  enterApp();
+}
+
+function doRegister(){
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('regPass').value;
+  const cls = document.getElementById('regClass').value.trim();
+  if(!name||!email||!pass){ showAuthError('Vui lòng điền đầy đủ thông tin!'); return; }
+  if(pass.length<6){ showAuthError('Mật khẩu phải có ít nhất 6 ký tự!'); return; }
+  const users = ls('users')||[];
+  if(users.find(u=>u.email.toLowerCase()===email)){ showAuthError('Email này đã được đăng ký!'); return; }
+  const newUser = {id:Date.now(),name,email,pass,role:'student',classRoom:cls||'Chưa có lớp',borrowedBooks:[],history:[]};
+  users.push(newUser);
+  ls('users',users);
+  currentUser = JSON.parse(JSON.stringify(newUser));
+  enterApp();
+}
+
+function showAuthError(msg){
+  const el = document.getElementById('authError');
+  el.textContent=msg; el.style.display='block';
+}
+
+function enterApp(){
+  document.getElementById('authScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  const av = currentUser.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('navAvatar').textContent=av;
+  document.getElementById('navName').textContent=currentUser.name.split(' ').slice(-1)[0];
+  if(currentUser.role==='admin'){
+    document.getElementById('nav-admin').style.display='flex';
+    document.getElementById('navAdminBadge').style.display='inline-block';
+  } else {
+    document.getElementById('nav-admin').style.display='none';
+    document.getElementById('navAdminBadge').style.display='none';
+  }
+  showPage('home');
+  updateBorrowBadge();
+}
+
+function doLogout(){
+  currentUser=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('authScreen').style.display='flex';
+  document.getElementById('nav-admin').style.display='none';
+  document.getElementById('navAdminBadge').style.display='none';
+  document.getElementById('bookModal').style.display='none';
+  closePdfModal();
+}
+
+function changePassword(){
+  const oldP = document.getElementById('oldPass').value;
+  const newP = document.getElementById('newPass').value;
+  const confP = document.getElementById('confirmPass').value;
+  if(oldP!==currentUser.pass){ notify('Mật khẩu hiện tại không đúng!','error'); return; }
+  if(newP.length<6){ notify('Mật khẩu mới phải có ít nhất 6 ký tự!','error'); return; }
+  if(newP!==confP){ notify('Mật khẩu xác nhận không khớp!','error'); return; }
+  const users=ls('users');
+  const idx=users.findIndex(u=>u.id===currentUser.id);
+  users[idx].pass=newP;
+  currentUser.pass=newP;
+  ls('users',users);
+  document.getElementById('oldPass').value='';
+  document.getElementById('newPass').value='';
+  document.getElementById('confirmPass').value='';
+  notify('Đổi mật khẩu thành công! 🔐','success');
+}
+
+// =================== NAVIGATION ===================
+function showPage(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  const navEl = document.getElementById('nav-'+page);
+  if(navEl) navEl.classList.add('active');
+
+  if(page==='home') renderHome();
+  if(page==='catalog') renderBooks();
+  if(page==='mybooks') renderMyBooks();
+  if(page==='wishlist') renderWishlist();
+  if(page==='profile') renderProfile();
+  if(page==='admin') renderAdmin();
+}
+
+// =================== HOME ===================
+function renderHome(){
+  const books = ls('books')||[];
+  const users = ls('users')||[];
+  const records = ls('borrowRecords')||[];
+  const active = records.filter(r=>!r.returnDate);
+  const available = books.reduce((s,b)=>s+b.available,0);
+
+  document.getElementById('homeGreeting').textContent = `Xin chào, ${currentUser.name}! 👋`;
+  document.getElementById('hs-total').textContent = books.length;
+  document.getElementById('hs-avail').textContent = available;
+  document.getElementById('hs-borrowed').textContent = active.length;
+  document.getElementById('hs-users').textContent = users.length;
+
+  const myHistory = currentUser.history||[];
+  const read = myHistory.length;
+  const pct = Math.min(100, Math.round(read/20*100));
+  document.getElementById('challengeBar').style.width=pct+'%';
+  document.getElementById('challengeText').textContent=`${read}/20`;
+
+  const now = Date.now();
+  const myOverdue = (currentUser.borrowedBooks||[]).filter(b=> b.dueDate && now > b.dueDate);
+  const alertEl = document.getElementById('overdueAlert');
+  if(myOverdue.length>0){
+    alertEl.style.display='flex';
+    document.getElementById('overdueMsg').textContent=`Bạn có ${myOverdue.length} sách quá hạn trả! Vui lòng trả sách ngay.`;
+  } else alertEl.style.display='none';
+
+  const borrowedIds = (currentUser.borrowedBooks||[]).map(b=>b.bookId);
+  const notBorrowed = books.filter(b=>!borrowedIds.includes(b.id)&&b.available>0);
+  const recs = [...notBorrowed].sort(()=>Math.random()-0.5).slice(0,8);
+  document.getElementById('recBooks').innerHTML = recs.map(b=>recCard(b)).join('');
+
+  const popular = [...books].sort((a,b)=>b.borrowCount-a.borrowCount).slice(0,8);
+  document.getElementById('popularBooks').innerHTML = popular.map(b=>recCard(b)).join('');
+
+  const newB = [...books].sort((a,b)=>b.id-a.id).slice(0,8);
+  document.getElementById('newBooks').innerHTML = newB.map(b=>recCard(b)).join('');
+}
+
+function recCard(b){
+  return `<div class="rec-card" onclick="openBook(${b.id})">
+    <div style="height:90px;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:10px;position:relative;${b.cover?'background:#0d1117':'background:rgba(30,40,55,.8)'}">
+      ${b.cover
+        ? `<span style="font-size:28px;position:absolute;opacity:.3">${b.emoji}</span><img src="${b.cover}" style="width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s;position:absolute;inset:0" loading="lazy" onload="this.style.opacity=1;this.previousElementSibling.style.opacity=0" onerror="this.remove();this.previousElementSibling.style.opacity=1">`
+        : `<span style="font-size:32px">${b.emoji}</span>`}
+    </div>
+    <div class="rec-title">${b.title}</div>
+    <div class="rec-author">${b.author}</div>
+    <div style="font-size:12px;margin-top:6px;color:${b.available>0?'var(--green2)':'var(--red2)'}">
+      ${b.available>0?'✅ Còn sách':'❌ Hết sách'}
+    </div>
+  </div>`;
+}
+
+// =================== BOOKS CATALOG ===================
+function renderBooks(){
+  const books = ls('books')||[];
+  const q = (document.getElementById('searchInput')?.value||'').toLowerCase();
+  const cat = document.getElementById('catFilter')?.value||'';
+  const avail = document.getElementById('availFilter')?.value||'';
+  const sort = document.getElementById('sortFilter')?.value||'default';
+  const wishlist = ls('wishlist_'+currentUser.id)||[];
+
+  let filtered = books.filter(b=>{
+    const mQ = !q || b.title.toLowerCase().includes(q)||b.author.toLowerCase().includes(q);
+    const mC = !cat || b.cat===cat;
+    const mA = !avail || (avail==='yes'?b.available>0:b.available===0);
+    return mQ&&mC&&mA;
+  });
+
+  if(sort==='rating') filtered.sort((a,b)=>b.rating-a.rating);
+  else if(sort==='az') filtered.sort((a,b)=>a.title.localeCompare(b.title));
+  else if(sort==='avail') filtered.sort((a,b)=>b.available-a.available);
+
+  const grid = document.getElementById('booksGrid');
+  if(!filtered.length){
+    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="icon">🔍</div><p>Không tìm thấy sách phù hợp</p></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(b=>{
+    const isWish = wishlist.includes(b.id);
+    return `<div class="book-card" onclick="openBook(${b.id})">
+      <div class="book-cover ${getCatClass(b.cat)}">
+        <span class="wishlist-btn" onclick="event.stopPropagation();toggleWishlist(${b.id})" title="${isWish?'Xóa khỏi yêu thích':'Thêm vào yêu thích'}">${isWish?'❤️':'🤍'}</span>
+        ${coverHtml(b)}
+        <span class="book-avail-badge ${b.available>0?'avail-yes':'avail-no'}">${b.available>0?`Còn ${b.available}`:'Hết'}</span>
+      </div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.author}</div>
+        <div class="book-meta">
+          <span class="book-cat">${b.cat}</span>
+          <span class="book-rating">${b.rating}⭐</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleWishlist(bookId){
+  const key = 'wishlist_'+currentUser.id;
+  let wl = ls(key)||[];
+  if(wl.includes(bookId)) wl=wl.filter(id=>id!==bookId);
+  else wl.push(bookId);
+  ls(key,wl);
+  renderBooks();
+}
+
+function renderWishlist(){
+  const wishlist = ls('wishlist_'+currentUser.id)||[];
+  const books = ls('books')||[];
+  const grid = document.getElementById('wishlistGrid');
+  const favBooks = books.filter(b=>wishlist.includes(b.id));
+  if(!favBooks.length){
+    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="icon">💔</div><p>Chưa có sách yêu thích. Hãy khám phá danh mục!</p></div>`;
+    return;
+  }
+  grid.innerHTML = favBooks.map(b=>`<div class="book-card" onclick="openBook(${b.id})">
+    <div class="book-cover ${getCatClass(b.cat)}">
+      <span class="wishlist-btn" onclick="event.stopPropagation();toggleWishlistFromWL(${b.id})">❤️</span>
+      ${coverHtml(b)}
+      <span class="book-avail-badge ${b.available>0?'avail-yes':'avail-no'}">${b.available>0?`Còn ${b.available}`:'Hết'}</span>
+    </div>
+    <div class="book-info">
+      <div class="book-title">${b.title}</div>
+      <div class="book-author">${b.author}</div>
+      <div class="book-meta"><span class="book-cat">${b.cat}</span><span class="book-rating">${b.rating}⭐</span></div>
+    </div>
+  </div>`).join('');
+}
+
+function toggleWishlistFromWL(bookId){
+  const key='wishlist_'+currentUser.id;
+  let wl=ls(key)||[];
+  wl=wl.filter(id=>id!==bookId);
+  ls(key,wl);
+  renderWishlist();
+  notify('Đã xóa khỏi yêu thích','info');
+}
+
+// =================== BOOK MODAL ===================
+function openBook(id){
+  selectedBookId = id;
+  const books = ls('books')||[];
+  const b = books.find(x=>x.id===id);
+  if(!b) return;
+
+  const cover = document.getElementById('mCover');
+  cover.className='modal-cover '+getCatClass(b.cat);
+  if(b.cover){
+    cover.innerHTML=`<span style="position:relative;z-index:1;font-size:52px;opacity:.25">${b.emoji}</span>
+      <img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;border-radius:12px;opacity:0;transition:opacity .4s" src="${b.cover}" alt="${b.title}"
+        onload="this.style.opacity=1;this.previousElementSibling.style.opacity=0"
+        onerror="this.remove();this.previousElementSibling.style.opacity=1">`;
+  } else {
+    cover.innerHTML=`<span style="position:relative;z-index:1;font-size:52px">${b.emoji}</span>`;
+  }
+
+  document.getElementById('mTitle').textContent=b.title;
+  document.getElementById('mAuthor').textContent='✍️ '+b.author;
+  document.getElementById('mDesc').textContent=b.desc;
+  document.getElementById('mStars').textContent='⭐'.repeat(Math.round(b.rating))+` ${b.rating}/5`;
+  document.getElementById('mTags').innerHTML=`
+    <span class="tag tag-cat">${b.cat}</span>
+    <span class="tag tag-year">${b.year}</span>
+    <span class="tag tag-count">📥 ${b.borrowCount} lượt mượn</span>`;
+
+  const avColor = b.available>0?'var(--green2)':'var(--red2)';
+  document.getElementById('mAvailText').innerHTML=`<span style="color:${avColor};font-weight:600;">${b.available>0?`✅ Còn ${b.available}/${b.total} cuốn`:`❌ Hết sách (0/${b.total} cuốn)`}</span>`;
+
+  const isBorrowed = (currentUser.borrowedBooks||[]).some(x=>x.bookId===id);
+  let actions = '';
+  if(isBorrowed){
+    actions+=`<button class="btn btn-danger btn-sm" onclick="returnBook(${id})">📥 Trả Sách</button>`;
+  } else if(b.available>0){
+    actions+=`<button class="btn btn-green btn-sm" onclick="borrowBook(${id})">📤 Mượn Sách</button>`;
+  } else {
+    actions+=`<button class="btn btn-sm" style="background:var(--bg3);color:var(--text3);cursor:not-allowed">🔔 Hết Sách</button>`;
+    actions+=`<button class="btn btn-blue btn-sm" onclick="joinWaitlist(${id})">📋 Đặt Chỗ</button>`;
+  }
+  const wishlist=ls('wishlist_'+currentUser.id)||[];
+  const isWish=wishlist.includes(id);
+  actions+=`<button class="btn btn-outline btn-sm" onclick="toggleWishlistModal(${id})">${isWish?'💔 Bỏ Yêu Thích':'❤️ Yêu Thích'}</button>`;
+  actions+=`<button class="btn btn-blue btn-sm" onclick="openPdfPreview(${id})">📄 Xem Trước PDF</button>`;
+  document.getElementById('mActions').innerHTML=actions;
+
+  const reviews = b.reviews||[];
+  document.getElementById('mReviews').innerHTML = reviews.length
+    ? reviews.map(r=>`<div class="review-item"><div class="review-user">👤 ${r.user}</div><div class="review-text">${r.text}</div></div>`).join('')
+    : '<div style="color:var(--text3);font-size:13px;font-style:italic">Chưa có nhận xét nào. Hãy là người đầu tiên!</div>';
+
+  document.getElementById('reviewInput').value='';
+  document.getElementById('bookModal').style.display='flex';
+}
+
+function closeModal(e){
+  if(e.target.id==='bookModal') document.getElementById('bookModal').style.display='none';
+}
+
+function toggleWishlistModal(id){
+  const key='wishlist_'+currentUser.id;
+  let wl=ls(key)||[];
+  const isWish=wl.includes(id);
+  if(isWish) wl=wl.filter(x=>x!==id); else wl.push(id);
+  ls(key,wl);
+  openBook(id);
+  notify(isWish?'Đã xóa khỏi yêu thích':'Đã thêm vào yêu thích ❤️','info');
+}
+
+function submitReview(){
+  const text = document.getElementById('reviewInput').value.trim();
+  if(!text){ notify('Vui lòng nhập nhận xét!','error'); return; }
+  const books=ls('books');
+  const idx=books.findIndex(b=>b.id===selectedBookId);
+  if(!books[idx].reviews) books[idx].reviews=[];
+  books[idx].reviews.push({user:currentUser.name,text});
+  ls('books',books);
+  openBook(selectedBookId);
+  notify('Đã gửi nhận xét! 💬','success');
+}
+
+// =================== BORROW / RETURN ===================
+function borrowBook(id){
+  const books = ls('books')||[];
+  const idx = books.findIndex(b=>b.id===id);
+  if(books[idx].available<=0){ notify('Sách đã hết!','error'); return; }
+
+  const myBorrowed = currentUser.borrowedBooks||[];
+  if(myBorrowed.some(b=>b.bookId===id)){ notify('Bạn đã mượn sách này rồi!','error'); return; }
+  if(myBorrowed.length>=5){ notify('Bạn chỉ có thể mượn tối đa 5 cuốn cùng lúc!','error'); return; }
+
+  const now = Date.now();
+  const dueDate = now + 14*24*60*60*1000;
+  const record = {id:Date.now(),userId:currentUser.id,bookId:id,borrowDate:now,dueDate,returnDate:null};
+
+  books[idx].available--;
+  books[idx].borrowCount = (books[idx].borrowCount||0)+1;
+  ls('books',books);
+
+  const records = ls('borrowRecords')||[];
+  records.push(record);
+  ls('borrowRecords',records);
+
+  const users = ls('users')||[];
+  const uIdx = users.findIndex(u=>u.id===currentUser.id);
+  users[uIdx].borrowedBooks = [...(users[uIdx].borrowedBooks||[]),{bookId:id,dueDate,recordId:record.id}];
+  currentUser.borrowedBooks = users[uIdx].borrowedBooks;
+  ls('users',users);
+
+  updateBorrowBadge();
+  openBook(id); // Refresh modal
+  notify(`Mượn sách "${books[idx].title}" thành công! Hạn trả: ${formatDate(dueDate)} 📚`,'success');
+}
+
+// ✅ FIX: Thêm tham số silent để tránh mở modal khi trả từ danh sách
+function returnBook(id, silent=false){
+  const books = ls('books')||[];
+  const idx = books.findIndex(b=>b.id===id);
+  const now = Date.now();
+
+  books[idx].available++;
+  ls('books',books);
+
+  const records = ls('borrowRecords')||[];
+  // ✅ FIX: Dùng findIndex + reverse thay vì findLastIndex (không hỗ trợ mọi browser)
+  let rIdx = -1;
+  for(let i=records.length-1;i>=0;i--){
+    if(records[i].userId===currentUser.id && records[i].bookId===id && !records[i].returnDate){ rIdx=i; break; }
+  }
+  if(rIdx>=0){ records[rIdx].returnDate=now; ls('borrowRecords',records); }
+
+  const users = ls('users')||[];
+  const uIdx = users.findIndex(u=>u.id===currentUser.id);
+  const bb = users[uIdx].borrowedBooks||[];
+  const rec = bb.find(b=>b.bookId===id);
+  const wasOverdue = rec && now > rec.dueDate;
+
+  users[uIdx].borrowedBooks = (users[uIdx].borrowedBooks||[]).filter(b=>b.bookId!==id);
+  // ✅ FIX: Bỏ [...{length:0}] gây lỗi TypeError
+  users[uIdx].history = [...(users[uIdx].history||[]), {bookId:id, returnDate:now, wasOverdue}];
+  currentUser.borrowedBooks = users[uIdx].borrowedBooks;
+  currentUser.history = users[uIdx].history;
+  ls('users',users);
+
+  updateBorrowBadge();
+  if(!silent) openBook(id); // Chỉ mở modal khi gọi từ modal
+  notify(`Trả sách thành công! ${wasOverdue?'⚠️ Bạn đã trả trễ hạn.':'🎉 Cảm ơn bạn đã trả đúng hạn!'}`,'success');
+}
+
+function joinWaitlist(id){
+  const books=ls('books');
+  const b=books.find(x=>x.id===id);
+  notify(`Đã đăng ký chờ sách "${b.title}". Bạn sẽ được thông báo khi có sách! 🔔`,'info');
+}
+
+function updateBorrowBadge(){
+  const count=(currentUser.borrowedBooks||[]).length;
+  const badge=document.getElementById('borrowBadge');
+  badge.textContent=count;
+  badge.style.display=count>0?'inline':'none';
+}
+
+// =================== MY BOOKS ===================
+function switchMyTab(tab){
+  ['borrowing','history','stats'].forEach(t=>{
+    document.getElementById('tab-'+t).style.display=t===tab?'block':'none';
+  });
+  document.querySelectorAll('#page-mybooks .stab').forEach((el,i)=>{
+    el.classList.toggle('active',['borrowing','history','stats'][i]===tab);
+  });
+  if(tab==='borrowing') renderBorrowing();
+  if(tab==='history') renderHistory();
+  if(tab==='stats') renderMyStats();
+}
+
+// ✅ FIX: Reset về tab đầu tiên mỗi lần vào trang
+function renderMyBooks(){
+  switchMyTab('borrowing');
+}
+
+function renderBorrowing(){
+  const books=ls('books')||[];
+  const borrowed=currentUser.borrowedBooks||[];
+  const list=document.getElementById('borrowedList');
+  if(!borrowed.length){
+    list.innerHTML=`<div class="empty-state"><div class="icon">📭</div><p>Bạn chưa mượn sách nào. Hãy khám phá thư viện!</p></div>`;
+    return;
+  }
+  const now=Date.now();
+  list.innerHTML=borrowed.map(item=>{
+    const b=books.find(x=>x.id===item.bookId);
+    if(!b) return '';
+    const diff=item.dueDate-now;
+    const days=Math.ceil(diff/86400000);
+    let dateClass='date-ok',dateText='';
+    if(days<0){ dateClass='date-over'; dateText=`⚠️ Quá hạn ${Math.abs(days)} ngày!`; }
+    else if(days<=3){ dateClass='date-warn'; dateText=`⚡ Còn ${days} ngày`; }
+    else { dateText=`Còn ${days} ngày`; }
+    return `<div class="borrowed-item">
+      <div class="bi-cover ${getCatClass(b.cat)}"><span style="position:relative;z-index:1">${b.emoji}</span></div>
+      <div class="bi-info">
+        <div class="bi-title">${b.title}</div>
+        <div class="bi-author">${b.author}</div>
+        <div class="bi-date ${dateClass}">📅 Hạn: ${formatDate(item.dueDate)} — ${dateText}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+        <button class="btn btn-danger btn-sm" onclick="returnBook(${b.id},true);renderBorrowing()">📥 Trả Sách</button>
+        <button class="btn btn-outline btn-sm" onclick="openBook(${b.id})">👁️ Xem</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderHistory(){
+  const books=ls('books')||[];
+  const history=currentUser.history||[];
+  const list=document.getElementById('historyList');
+  if(!history.length){
+    list.innerHTML=`<div class="empty-state"><div class="icon">📋</div><p>Chưa có lịch sử mượn sách</p></div>`;
+    return;
+  }
+  list.innerHTML=[...history].reverse().map(item=>{
+    const b=books.find(x=>x.id===item.bookId);
+    return `<div class="history-item">
+      <span class="history-icon">${b?b.emoji:'📕'}</span>
+      <div class="history-info">
+        <div class="history-title">${b?b.title:'Sách đã xóa'}</div>
+        <div class="history-date">Trả ngày: ${formatDate(item.returnDate)}</div>
+      </div>
+      <span class="history-status ${item.wasOverdue?'h-overdue':'h-returned'}">${item.wasOverdue?'Trễ hạn':'Đúng hạn'}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderMyStats(){
+  const history=currentUser.history||[];
+  const borrowed=currentUser.borrowedBooks||[];
+  const onTime=history.filter(h=>!h.wasOverdue).length;
+  const overdue=history.filter(h=>h.wasOverdue).length;
+  const pct=history.length>0?Math.round(onTime/history.length*100):100;
+  document.getElementById('myStats').innerHTML=`
+    <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-val">${history.length+borrowed.length}</div><div class="stat-label">Tổng Đã Mượn</div></div>
+    <div class="stat-card"><div class="stat-icon">📤</div><div class="stat-val">${borrowed.length}</div><div class="stat-label">Đang Mượn</div></div>
+    <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-val">${onTime}</div><div class="stat-label">Trả Đúng Hạn</div></div>
+    <div class="stat-card"><div class="stat-icon">⚠️</div><div class="stat-val">${overdue}</div><div class="stat-label">Trả Trễ</div></div>
+    <div class="stat-card"><div class="stat-icon">🏆</div><div class="stat-val">${pct}%</div><div class="stat-label">Tỷ Lệ Đúng Hạn</div></div>
+    <div class="stat-card"><div class="stat-icon">📖</div><div class="stat-val">${history.length}</div><div class="stat-label">Sách Đã Đọc</div></div>`;
+}
+
+// =================== PROFILE ===================
+function renderProfile(){
+  const av=currentUser.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('profileAvatar').textContent=av;
+  document.getElementById('profileName').textContent=currentUser.name;
+  document.getElementById('profileEmail').textContent=currentUser.email+' | '+currentUser.classRoom;
+  const roleEl=document.getElementById('profileRole');
+  roleEl.textContent=currentUser.role==='admin'?'Quản Trị Viên':'Học Sinh';
+  roleEl.className='status-pill '+(currentUser.role==='admin'?'pill-admin':'pill-student');
+  const h=currentUser.history||[];
+  const b=currentUser.borrowedBooks||[];
+  const wl=ls('wishlist_'+currentUser.id)||[];
+  document.getElementById('profileStats').innerHTML=`
+    <div class="ps-item"><div class="ps-val">${h.length}</div><div class="ps-key">Đã đọc</div></div>
+    <div class="ps-item"><div class="ps-val">${b.length}</div><div class="ps-key">Đang mượn</div></div>
+    <div class="ps-item"><div class="ps-val">${wl.length}</div><div class="ps-key">Yêu thích</div></div>
+    <div class="ps-item"><div class="ps-val">${h.filter(x=>!x.wasOverdue).length}</div><div class="ps-key">Đúng hạn</div></div>`;
+}
+
+// =================== ADMIN ===================
+function switchAdminTab(tab){
+  ['overview','books','borrows','users'].forEach(t=>{
+    document.getElementById('atab-'+t).style.display=t===tab?'block':'none';
+  });
+  document.querySelectorAll('#page-admin .stab').forEach((el,i)=>{
+    el.classList.toggle('active',['overview','books','borrows','users'][i]===tab);
+  });
+  if(tab==='overview') renderAdminOverview();
+  if(tab==='books') renderAdminBooks();
+  if(tab==='borrows') renderAdminBorrows();
+  if(tab==='users') renderAdminUsers();
+}
+
+// ✅ FIX: Kiểm tra quyền admin đúng cách + reset tab về overview
+function renderAdmin(){
+  if(!currentUser || currentUser.role!=='admin'){
+    notify('Bạn không có quyền truy cập trang này!','error');
+    showPage('home');
+    return;
+  }
+  switchAdminTab('overview'); // ✅ Reset tab về overview mỗi lần vào
+}
+
+function renderAdminOverview(){
+  const books=ls('books')||[];
+  const users=ls('users')||[];
+  const records=ls('borrowRecords')||[];
+  const active=records.filter(r=>!r.returnDate);
+  const now=Date.now();
+  const overdue=active.filter(r=>now>r.dueDate);
+
+  document.getElementById('adminStats').innerHTML=`
+    <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-val">${books.length}</div><div class="stat-label">Tổng Sách</div></div>
+    <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-val">${users.length}</div><div class="stat-label">Người Dùng</div></div>
+    <div class="stat-card"><div class="stat-icon">📤</div><div class="stat-val">${active.length}</div><div class="stat-label">Đang Mượn</div></div>
+    <div class="stat-card"><div class="stat-icon">⚠️</div><div class="stat-val">${overdue.length}</div><div class="stat-label">Quá Hạn</div></div>
+    <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-val">${records.filter(r=>r.returnDate).length}</div><div class="stat-label">Đã Trả</div></div>
+    <div class="stat-card"><div class="stat-icon">📥</div><div class="stat-val">${books.reduce((s,b)=>s+b.borrowCount,0)}</div><div class="stat-label">Tổng Lượt Mượn</div></div>`;
+
+  const tbody=document.getElementById('overdueTable');
+  if(!overdue.length){
+    tbody.innerHTML=`<tr><td colspan="6" style="text-align:center;color:var(--text3);font-style:italic">Không có sách quá hạn 🎉</td></tr>`;
+  } else {
+    tbody.innerHTML=overdue.map(r=>{
+      const u=users.find(x=>x.id===r.userId);
+      const b=books.find(x=>x.id===r.bookId);
+      const days=Math.ceil((now-r.dueDate)/86400000);
+      return `<tr>
+        <td>${u?u.name:'?'}</td><td>${b?b.title:'?'}</td>
+        <td>${formatDate(r.borrowDate)}</td><td>${formatDate(r.dueDate)}</td>
+        <td><span class="status-pill pill-overdue">+${days} ngày</span></td>
+        <td><button class="btn btn-green btn-sm" onclick="adminForceReturn(${r.id})">Xác nhận trả</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  const popBooks=[...books].sort((a,b)=>b.borrowCount-a.borrowCount).slice(0,5);
+  document.getElementById('popularTable').innerHTML=popBooks.map(b=>`<tr>
+    <td>${b.emoji} ${b.title}</td><td>${b.author}</td>
+    <td><strong style="color:var(--gold2)">${b.borrowCount}</strong></td>
+    <td>${b.available}/${b.total}</td>
+  </tr>`).join('');
+}
+
+function adminForceReturn(recordId){
+  const records=ls('borrowRecords');
+  const rIdx=records.findIndex(r=>r.id===recordId);
+  if(rIdx<0) return;
+  const r=records[rIdx];
+  records[rIdx].returnDate=Date.now();
+  ls('borrowRecords',records);
+
+  const books=ls('books');
+  const bIdx=books.findIndex(b=>b.id===r.bookId);
+  if(bIdx>=0){ books[bIdx].available++; ls('books',books); }
+
+  const users=ls('users');
+  const uIdx=users.findIndex(u=>u.id===r.userId);
+  if(uIdx>=0){
+    users[uIdx].borrowedBooks=(users[uIdx].borrowedBooks||[]).filter(b=>b.bookId!==r.bookId);
+    // ✅ FIX: Dùng array spread đúng
+    users[uIdx].history=[...(users[uIdx].history||[]),{bookId:r.bookId,returnDate:Date.now(),wasOverdue:true}];
+    ls('users',users);
+    if(currentUser.id===r.userId){
+      currentUser.borrowedBooks=users[uIdx].borrowedBooks;
+      currentUser.history=users[uIdx].history;
+    }
+  }
+  notify('Đã xác nhận trả sách!','success');
+  renderAdminOverview();
+}
+
+function renderAdminBooks(){
+  const books=ls('books')||[];
+  document.getElementById('bookCount').textContent=books.length;
+  document.getElementById('adminBooksTable').innerHTML=books.map(b=>`<tr>
+    <td>${b.emoji} <strong>${b.title}</strong></td>
+    <td>${b.author}</td>
+    <td><span class="book-cat">${b.cat}</span></td>
+    <td>${b.total}</td>
+    <td><strong style="color:${b.available>0?'var(--green2)':'var(--red2)'}">${b.available}</strong></td>
+    <td>${b.borrowCount}</td>
+    <td style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-blue btn-sm" onclick="editBook(${b.id})">✏️ Sửa</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteBook(${b.id})">🗑️ Xóa</button>
+    </td>
+  </tr>`).join('');
+}
+
+let editingBookId = null;
+function editBook(id){
+  const books=ls('books');
+  const b=books.find(x=>x.id===id);
+  editingBookId=id;
+  document.getElementById('bTitle').value=b.title;
+  document.getElementById('bAuthor').value=b.author;
+  document.getElementById('bCat').value=b.cat;
+  document.getElementById('bYear').value=b.year;
+  document.getElementById('bTotal').value=b.total;
+  document.getElementById('bEmoji').value=b.emoji;
+  document.getElementById('bDesc').value=b.desc;
+  document.getElementById('addBookFormTitle').textContent='✏️ Chỉnh Sửa Sách';
+  document.getElementById('cancelEditBtn').style.display='inline-flex';
+  document.getElementById('editBookId').value=id;
+  // ✅ Scroll đến form thêm sách trong tab books
+  document.querySelector('#atab-books .add-book-form').scrollIntoView({behavior:'smooth'});
+}
+
+function clearBookForm(){
+  editingBookId=null;
+  ['bTitle','bAuthor','bYear','bTotal','bEmoji','bDesc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('bCat').value='Văn học';
+  document.getElementById('addBookFormTitle').textContent='➕ Thêm Sách Mới';
+  document.getElementById('cancelEditBtn').style.display='none';
+  document.getElementById('editBookId').value='';
+}
+
+function saveBook(){
+  const title=document.getElementById('bTitle').value.trim();
+  const author=document.getElementById('bAuthor').value.trim();
+  if(!title||!author){ notify('Vui lòng nhập tên sách và tác giả!','error'); return; }
+  const books=ls('books')||[];
+  const cat=document.getElementById('bCat').value;
+  const year=parseInt(document.getElementById('bYear').value)||new Date().getFullYear();
+  const total=parseInt(document.getElementById('bTotal').value)||1;
+  const emoji=document.getElementById('bEmoji').value||'📖';
+  const desc=document.getElementById('bDesc').value.trim()||'Chưa có mô tả.';
+
+  if(editingBookId){
+    const idx=books.findIndex(b=>b.id===editingBookId);
+    const oldTotal=books[idx].total;
+    const diff=total-oldTotal;
+    books[idx]={...books[idx],title,author,cat,year,total,available:Math.max(0,books[idx].available+diff),emoji,desc};
+    ls('books',books);
+    notify('Cập nhật sách thành công! ✅','success');
+  } else {
+    const newBook={id:Date.now(),title,author,cat,year,total,available:total,emoji,cover:null,desc,rating:0,reviews:[],borrowCount:0};
+    books.push(newBook);
+    ls('books',books);
+    notify('Thêm sách mới thành công! 📚','success');
+  }
+  clearBookForm();
+  renderAdminBooks();
+}
+
+function deleteBook(id){
+  const books=ls('books');
+  const b=books.find(x=>x.id===id);
+  if(!confirm(`Xóa sách "${b.title}"? Thao tác này không thể hoàn tác.`)) return;
+  ls('books',books.filter(x=>x.id!==id));
+  notify('Đã xóa sách!','info');
+  renderAdminBooks();
+}
+
+function renderAdminBorrows(){
+  const books=ls('books')||[];
+  const users=ls('users')||[];
+  const records=ls('borrowRecords')||[];
+  const active=records.filter(r=>!r.returnDate);
+  const done=records.filter(r=>r.returnDate);
+  const now=Date.now();
+
+  document.getElementById('borrowCount').textContent=active.length;
+  document.getElementById('adminBorrowsTable').innerHTML=active.length
+    ? active.map(r=>{
+        const u=users.find(x=>x.id===r.userId);
+        const b=books.find(x=>x.id===r.bookId);
+        const overdue=now>r.dueDate;
+        const days=Math.ceil((r.dueDate-now)/86400000);
+        return `<tr>
+          <td>${u?u.name:'?'}</td><td>${u?u.classRoom:'?'}</td>
+          <td>${b?b.emoji+' '+b.title:'?'}</td>
+          <td>${formatDate(r.borrowDate)}</td><td>${formatDate(r.dueDate)}</td>
+          <td><span class="status-pill ${overdue?'pill-overdue':'pill-active'}">${overdue?`Quá ${Math.abs(days)} ngày`:`Còn ${days} ngày`}</span></td>
+          <td><button class="btn btn-green btn-sm" onclick="adminForceReturn(${r.id});renderAdminBorrows()">📥 Trả</button></td>
+        </tr>`;
+      }).join('')
+    : '<tr><td colspan="7" style="text-align:center;color:var(--text3)">Không có sách đang mượn</td></tr>';
+
+  document.getElementById('adminHistoryTable').innerHTML=[...done].reverse().slice(0,50).map(r=>{
+    const u=users.find(x=>x.id===r.userId);
+    const b=books.find(x=>x.id===r.bookId);
+    const isLate = r.dueDate && r.returnDate > r.dueDate;
+    return `<tr>
+      <td>${u?u.name:'?'}</td><td>${b?b.emoji+' '+b.title:'?'}</td>
+      <td>${formatDate(r.borrowDate)}</td><td>${formatDate(r.returnDate)}</td>
+      <td><span class="status-pill ${isLate?'pill-overdue':'pill-active'}">${isLate?'Trễ hạn':'Đúng hạn'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderAdminUsers(){
+  const users=ls('users')||[];
+  document.getElementById('adminUsersTable').innerHTML=users.map(u=>`<tr>
+    <td><strong>${u.name}</strong></td>
+    <td style="font-size:13px;color:var(--text3)">${u.email}</td>
+    <td>${u.classRoom||'—'}</td>
+    <td><span class="status-pill ${u.role==='admin'?'pill-admin':'pill-student'}">${u.role==='admin'?'Admin':'Học sinh'}</span></td>
+    <td>${(u.borrowedBooks||[]).length}</td>
+    <td>${(u.history||[]).length}</td>
+    <td style="display:flex;gap:6px">
+      ${u.id!==currentUser.id?`<button class="btn btn-danger btn-sm" onclick="deleteUser(${u.id})">🗑️</button>`:'<span style="color:var(--text3);font-size:12px">Bạn</span>'}
+      ${u.role!=='admin'?`<button class="btn btn-blue btn-sm" onclick="makeAdmin(${u.id})">👑</button>`:''}
+    </td>
+  </tr>`).join('');
+}
+
+function deleteUser(id){
+  if(!confirm('Xóa người dùng này?')) return;
+  const users=ls('users').filter(u=>u.id!==id);
+  ls('users',users);
+  renderAdminUsers();
+  notify('Đã xóa người dùng','info');
+}
+
+function makeAdmin(id){
+  if(!confirm('Cấp quyền Admin cho người dùng này?')) return;
+  const users=ls('users');
+  const idx=users.findIndex(u=>u.id===id);
+  users[idx].role='admin';
+  ls('users',users);
+  renderAdminUsers();
+  notify('Đã cấp quyền Admin 👑','success');
+}
+
+// =================== UTILS ===================
+function formatDate(ts){
+  if(!ts) return '—';
+  return new Date(ts).toLocaleDateString('vi-VN');
+}
+
+function notify(msg,type='success'){
+  const el=document.createElement('div');
+  el.className=`notif-toast notif-${type}`;
+  el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),3100);
+}
+
+// =================== PDF PREVIEW ===================
+const BOOK_PDFS = {
+  1: `JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyA5IDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDggMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyA4IDAgUiAvVHlwZSAvQ2F0YWxvZwo+PgplbmRvYmoKNyAwIG9iago8PAovQXV0aG9yIChcKGFub255bW91c1wpKSAvQ3JlYXRpb25EYXRlIChEOjIwMjYwMzE5MTI1ODQzKzAwJzAwJykgL0NyZWF0b3IgKFwodW5zcGVjaWZpZWRcKSkgL0tleXdvcmRzICgpIC9Nb2REYXRlIChEOjIwMjYwMzE5MTI1ODQzKzAwJzAwJykgL1Byb2R1Y2VyIChSZXBvcnRMYWIgUERGIExpYnJhcnkgLSBcKG9wZW5zb3VyY2VcKSkgCiAgL1N1YmplY3QgKFwodW5zcGVjaWZpZWRcKSkgL1RpdGxlIChcKGFub255bW91c1wpKSAvVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0NvdW50IDEgL0tpZHMgWyA1IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKOSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAxNzkxCj4+CnN0cmVhbQpHYXRtO2Q7bXUiJjpGNFJnZ2NlOD1UU1x0K0UqKyUzYzQ4azo3K15lM2RsTig3ViIqNk5fQ3FROUwkNzwhJUNkUlEsSU8mMGtIOVloOzJXOE5ZRTJlXk1xZU03SiVlISsrRm5LLFw4JmhXJ0Y0JzVxZlIuOkZBRkZMSVAyUi1NV3FlZHRHUmBac0s/UkRLZnBWNWMvTmY+KT5MWy83JUgybmBgVWZHYihLbTcmYyxUSHRrNy5HZVl1SF07KTYqQ0VNa25dMnVjbEhJUmNbJmdOQy8xbGQvVWEhZm9mSURrQDxVQ3M+VDgudT4uWFdqR2U6bSRtV1ElSlNHTmZkNlA7SEE+WjheZDJSUjExPE5UUUZrTywkV0VYQmhrIj85dHFLVWhVK2REZEJEOkguL1NxLlZbLjdHJ0pzLDpKTEAzKV1FST1oXmUxR1onPTM9OisuYnQ9T2JpX3BVbGBnKWxIcy9QXWtWQW82WmRTTSRdKVtsblZFdEciU21dcTViU0gtQGc5TyRnUj0iMzpCLUVrMSRpbSNYPylAbGRFKkdyVFszRS9qV3IxYmAiZ1owQi1edHVrZm5DVllfbENoXVM4YVZkRyhHNFBPUyoyN21rWzksYHRKPjpicFB1I0NVaUI4X0tTV15SYGIkRGc6bU9vZjVhPV5TPSRmO0U8RCMiVGkuYyF1cyM3IXM5YEVCYUA6J1JBcSo5UE1WamtWYS01WzVLckZKK2onbTE0dWsuKVZJJV1zY1I8UiRISFgnOSpETiNzalByLDsrclooNnI+TU1IPCNGWDhab2Eoai1xcTNOVDVaMjhVSGs7QCc6RFxqUkN1R0ZiKiJdImkpJjViV2NORFA1Mzw7U0ciWz4+XGozPHFoOVZoNVUzUWRhL2ZNSzhlUjdcbk1hKEQjQ0FgcyMxRVdWKDNFNldiX3Q3KjpWZDRAO2hPSEJQSnAvbT0pbGE7I3FWOEw3OjIhU3MpQGtNRmUsbWUwQExNKG1iKyxlXlFJWklTYnRFcUtfYzQoOCoyXztEZGNpQ1diZypJTVlOV3U7XWRYTTxoOCtSSGpzZjVRPltVRGE3WCZDJUc8KUEpYSZ0NEREPnR0blxAJE9cTlQiQ19dOUtZN1QkWjhwakllOj1rOllFKmhiUnE6M1VVUjVncExwZFMjMnArZyEtTDYmQU1PdD5Vcig1PWRjYXQqbHFDVTBXLEpOYSxxbiRRLkddZ0NbYjZdPjQxJlFrYFUhPV8na01aRHVeKFRnaEJJV0RUMkMuaCpKQFclVDVLKXE1QHAzTVQlR2kvM1x0KWw3UipcUUNJc15FNGQwdEFUR1VkY0oySVkoKzJxKFR0JnBwOyVsNF02Jz5cZmAxXC8uVUlRLyxDKFpnXTExKXJOOGs0bTVxXFU+SzVJV1REIXAhJk5TJCpibzkoYSU+W2klPWQlaVNebTFDMyFHQmQjOkBwWWBDb1FDNTgzczN0bS9XSi1POE5tIUIoWWRVWCZFbjpPW0Zca3RvWks7MVkyNklBc1JRND9AOVZvWlZFKUpZLUw+PjE+KitabiZTczlGMmpva21taSYnJmUiVy5qKmthUks3bCUoRVBoJVddM11XazhjJmwqQjxARUxEYTkpQ1s4IVhAIUpOKSIlOmg/bWcwNSgyOGwvZ2ZWSShWW0EnY1M8LkhoVThrUj8qY18hJ08oO0pILyUwQkI7cGRiVV9UQXBBVC1DSkk4ZFo8TGxhTFwkZjxQRz5HPTZ1ImRLSjlUaCEyW2BjXG8xMSc1Zz1MREpmLVpnRklGPGQqSjlSM0FrQyM+Vl9hOXRvaSVoYCVkclkuOGM9SSlyT2ZyPEFUVyhxXWZeUzo2c04rc2siVTM1Izw9KTRLYzdCdG5POldSVHJVa2VrQ1FKUS0nSi5YKiljXjtdKC8rUjpVU0gnPDpTL1hVai5vaEtMNkU/aFBtNz5QRi5URWhfKUY+XVRnXzZGQlwwYzVWTkVQN29rRjV0UHBlTm4rcmlFQzBjU2ZucCxdMXJWK2JtZWFoZkY9SFphNWw7YjB1dHFWal5zI1xGXz8vV09ibkJXL01URkNFKUBrSEouU2QkJGFxRF1UIlMjMUFxQTkzL3BiTmkwKSNJbzxSKF1qNGEoPjJVWTUtNWpuVyE1YjtzbSotViJYQ25mdEUvPyhALm0takIualJDSHI1MUtqLVY0aFhPK11DdGBhcGFuOlUuJUMySl09Z11kM1gwMUBAdHQjITU5XG8/YDdNRllETy51OUtFLGMuak9lNzYlKmBcK3BPPjpBSDV1bTU0ZUxiXzk7VDclXC11LyVuIVQ5XWJQLjlLNVBgKzhsbEhnOEhXPlcmb1UhUUhZVENMPU5KJG9qZEUwLkpPOC90fj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMAowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDExMiAwMDAwMCBuIAowMDAwMDAwMjE5IDAwMDAwIG4gCjAwMDAwMDAzMzEgMDAwMDAgbiAKMDAwMDAwMDQ0NiAwMDAwMCBuIAowMDAwMDAwNjQ5IDAwMDAwIG4gCjAwMDAwMDA3MTcgMDAwMDAgbiAKMDAwMDAwMDk5NyAwMDAwMCBuIAowMDAwMDAxMDU2IDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPDc4MGQ1ZDhiMTMxZTM1MmQyZDEyYmE4ZTRhOWUzYWNmPjw3ODBkNWQ4YjEzMWUzNTJkMmQxMmJhOGU0YTllM2FjZj5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChvcGVuc291cmNlKQoKL0luZm8gNyAwIFIKL1Jvb3QgNiAwIFIKL1NpemUgMTAKPj4Kc3RhcnR4cmVmCjI5MzgKJSVFT0YK`,
+  7: `JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyA5IDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDggMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyA4IDAgUiAvVHlwZSAvQ2F0YWxvZwo+PgplbmRvYmoKNyAwIG9iago8PAovQXV0aG9yIChcKGFub255bW91c1wpKSAvQ3JlYXRpb25EYXRlIChEOjIwMjYwMzE5MTI1ODQzKzAwJzAwJykgL0NyZWF0b3IgKFwodW5zcGVjaWZpZWRcKSkgL0tleXdvcmRzICgpIC9Nb2REYXRlIChEOjIwMjYwMzE5MTI1ODQzKzAwJzAwJykgL1Byb2R1Y2VyIChSZXBvcnRMYWIgUERGIExpYnJhcnkgLSBcKG9wZW5zb3VyY2VcKSkgCiAgL1N1YmplY3QgKFwodW5zcGVjaWZpZWRcKSkgL1RpdGxlIChcKGFub255bW91c1wpKSAvVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0NvdW50IDEgL0tpZHMgWyA1IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKOSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAxNzQwCj4+CnN0cmVhbQpHYXRtO2dOKGUnJjpNbCtvT0YzMEJKJW9DL2AlVVlUY2kuLTVaK3FzJXVTRGRdYnQlakBvJklBNSg2O05TcjNbUUE0XVs/Wl9kKj1oPC9uJ09va1BTcy4zNFlPL01YNT9dcTRaa3BNWFZMaE0qMDpTcFhTTyRvV0NQRUgyXHIkRCtwSk1dKT1vOnQlLmVqXiU0a2E5ZGhNRFc8Iy1Ec1dNTmVISjlQKFg1V1YpOkhjPC8jWS0wdEZ1bS1DcSRJWG1iJW4kUzY8YCpAaF5AQUwmUV8nUUwsYl9MX1RnMSMsOEUtQl4tQDhMLyFhYihyRyIpQzllWyNbX0kqMTZEVDMvKicnW2xMVV0vKW1MKk4lYXUrQlZEQzheQXQqQyxEZDsmWiVCVjBFRiNCTGtIO2VvQi9cOlRzMiNXYzwlcW1gVEw2VEQ4ISorYCI6aC06ZiFGaGUhTm0vQDFbbnFGSStqIlxZPDE2Y29HO0xGai9tXGdwRSZXXVxTbzglc2ZER1ZMT1BDa0JsOzwrLl8lKV87TzlvRkBKRWhjaFdHaWAnIl5JNy1FSyskP2BZR0VBJVtXdDFdVWc0JTFeKVEiZz5XTytOWFQyVSpAT3VkJ1V0W24hQTNOazYvdXMocFJvRHVjdDlIb0U9LCknLUtgKS1qLSxmZF1tMFNSUFU9JyVpbUZnKUZTPW9dck5lI3VCWmdvIVRGRTBTXzVLOjFPRSRLZmk0KVpWVW5MISZiT3Q5UDsjQkNpVEBaR0g8JE86QlQsKnV1azlNLnRXVThuaDpASXVANDRlQFo0cmdALmpaWCU0NT1LQjs2SVtET2w3O0I2TjVUUHMtVSFGPFFORk4kK0BNW1RkLiokZ1VqQ24uUCVKdTYvTXBaSltcXkZLWU5zJ1FTIzBIUC9NLnUzXDVWcjJdOz51TFlCIS1WSTAvXDMic2ErbmprQHRtOWg1O3MmU1c2KTNxPT5xJD4wdERiZWUlSiV0KywrMC1QdDlsVE5RUjpQLWw+XGNyRUpdL0BwTTAkQ2g2XVsjc05qQkVbOFNZVnMnPU8zTmlhaklaIkI8RSRCKUVaNlVCIj51QyZENSZBJHQoZmlTQ1RrOzZQTG9QaDtOXD0uTChbaVQwKDVAb0JzJUsncyQhYVMpR10iWFZuQChtTCdaVj1AJy4nVic0TU02TmkzWzEwZkBrOSsodUxbSjVTOj4nMltCYzpNcFdPXW9EX21FIlwiY2RsKilZO21zM1hgbmE7WF10WV0vREkvVzNyMU5HWTQqMTpsMltgWSFqM0ImMyhRNXA5WjBNMTg/O1xBRSFNKXI8IWo6bmsvUmdlOVhKSTM0cXNrOGReOFElVCI0WlZEOysqdCdjKjZfKzMhW3M5Vy80RUtqSi9ea20wbiNUbFs1OS81NWkhXFhsKG8+aVRFPW85TCUvcUlTRD0pLywsKkpybmBTJEdtVnAlXGQ5USIuYms2XFlrK1I7aSQwcj5yL09JWElgYl9PP0JiUmgkT3JvK0w5RiZvUmBbRjtVRVRRRzFpOFM7Q0thOlEkQVhcZkNbRVZmRT9oMzBxNjQrITIjI3NmMHQvVUJhbFA8RyRgJjkzVGwoNS8oa1giai1FPy84ajdwNTk6bG11NEo9c1o/O0QkakAsSEE2WHBbZE1ZdD0uY2NlczBuaW5VYC5jdVdGUTkzMDVdXFFGbj0yTyYrPWMxbCRZWmVnZigoJGNfKVomTmdfcEU/Zl8zSyYwSkRpZzMqUG5QR0NfKEI4RWpkUGxaNmwwPThzMCZeJENTRDFrZyRgWFY5cSptZ2tSOztLa0l1bHJVQ0tNVClxc0QlJUM/RWNPXScoRmZCWC40VjU0P2liJz5VTi1rOSU1X0ssO2cvZUdWI24nWjlhb247WDZITkVLKiYsbC5CY3EyJkwqX2omRWBkMTo6OjZrUnBhMGxFYCNJXS1rP25aOiRoP20lajpccD5AbGVzMDwkZmo7M2B1XVIvP1YoSicsNlRkOWJnJCpQYGFwLl47cSljRWQ1PFRTRVQoY1lcLkZYcjFdWlBWQ1Y6RFxYPigtNik6KjIpcTdiMkk+a2pgTTQsZzo6VFhxXU8zdDEuP0VtaXAvJllYOV5lV1Q9cVFqVUhCOF9jLktkNHU6NEQwYF4mLTJkU1lkLiFMMCwvOis8RWVeRl5kWEUvIlooR2BZYDtvMi0+XXRNMzBoaG5nSEtZWUBLJVZjZHMrQFRhcDkiQUc4SyFSUiZOPjc+VWw3ZWxxUzdzRCVRJlc0cG0+LE1WQzI4M2NFZFFsZ1JZJC5gZU5qLWQ9OWZGZmpYfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMAowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDExMiAwMDAwMCBuIAowMDAwMDAwMjE5IDAwMDAwIG4gCjAwMDAwMDAzMzEgMDAwMDAgbiAKMDAwMDAwMDQ0NiAwMDAwMCBuIAowMDAwMDAwNjQ5IDAwMDAwIG4gCjAwMDAwMDA3MTcgMDAwMDAgbiAKMDAwMDAwMDk5NyAwMDAwMCBuIAowMDAwMDAxMDU2IDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPDcwOTE0ZTJhZWVkMjlkMTFkMWJmNzUzZDUzMWI2MzYzPjw3MDkxNGUyYWVlZDI5ZDExZDFiZjc1M2Q1MzFiNjM2Mz5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChvcGVuc291cmNlKQoKL0luZm8gNyAwIFIKL1Jvb3QgNiAwIFIKL1NpemUgMTAKPj4Kc3RhcnR4cmVmCjI4ODcKJSVFT0YK`,
+};
+
+let pdfDoc = null, pdfPage = 1, pdfTotal = 1, pdfScale = 1.2, currentPdfBookId = null;
+
+function b64ToUint8(b64){
+  const raw=atob(b64); const arr=new Uint8Array(raw.length);
+  for(let i=0;i<raw.length;i++) arr[i]=raw.charCodeAt(i);
+  return arr;
+}
+
+async function openPdfPreview(bookId){
+  const books=ls('books')||[];
+  const b=books.find(x=>x.id===bookId);
+  if(!b) return;
+  document.getElementById('bookModal').style.display='none';
+  const modal=document.getElementById('pdfModal');
+  document.getElementById('pdfModalTitle').textContent=`📄 ${b.title} — ${b.author}`;
+  modal.classList.add('open');
+  currentPdfBookId=bookId;
+  pdfPage=1; pdfScale=1.2;
+  document.getElementById('pdfZoomVal').textContent='120%';
+
+  // Restore canvas wrap nếu bị thay
+  const wrap=document.getElementById('pdfCanvasWrap');
+  if(!wrap.querySelector('#pdfCanvas')){
+    wrap.innerHTML=`<div class="pdf-loading" id="pdfLoading" style="display:none"><div class="pdf-spinner"></div><span>Đang tải PDF...</span></div><canvas id="pdfCanvas" style="display:none"></canvas>`;
+  }
+  const canvas=document.getElementById('pdfCanvas');
+  canvas.style.display='none';
+  document.getElementById('pdfLoading').style.display='flex';
+
+  if(!BOOK_PDFS[bookId]){
+    document.getElementById('pdfLoading').style.display='none';
+    wrap.innerHTML=`<div class="pdf-no-preview"><div class="icon">📋</div><p>Sách này chưa có file PDF xem trước.<br>Vui lòng liên hệ thủ thư để yêu cầu.</p></div>`;
+    return;
+  }
+  try {
+    if(typeof pdfjsLib==='undefined') throw new Error('PDF.js not loaded');
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const data=b64ToUint8(BOOK_PDFS[bookId]);
+    pdfDoc=await pdfjsLib.getDocument({data}).promise;
+    pdfTotal=pdfDoc.numPages;
+    await renderPdfPage();
+    updatePdfControls();
+  } catch(e){
+    const wrap2=document.getElementById('pdfCanvasWrap');
+    wrap2.innerHTML=`<div class="pdf-no-preview"><div class="icon">⚠️</div><p>Không thể tải PDF. Hãy thử tải về máy.</p></div>`;
+  }
+}
+
+async function renderPdfPage(){
+  if(!pdfDoc) return;
+  const canvas=document.getElementById('pdfCanvas');
+  const loading=document.getElementById('pdfLoading');
+  if(loading) loading.style.display='flex';
+  canvas.style.display='none';
+  try {
+    const page=await pdfDoc.getPage(pdfPage);
+    const vp=page.getViewport({scale:pdfScale});
+    canvas.width=vp.width; canvas.height=vp.height;
+    await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+    if(loading) loading.style.display='none';
+    canvas.style.display='block';
+    document.getElementById('pdfPageInfo').textContent=`${pdfPage} / ${pdfTotal}`;
+  } catch(e){ if(loading) loading.style.display='none'; }
+}
+
+function updatePdfControls(){
+  document.getElementById('pdfPrevBtn').disabled=pdfPage<=1;
+  document.getElementById('pdfNextBtn').disabled=pdfPage>=pdfTotal;
+}
+
+function pdfPrevPage(){ if(pdfPage>1){ pdfPage--; renderPdfPage(); updatePdfControls(); } }
+function pdfNextPage(){ if(pdfPage<pdfTotal){ pdfPage++; renderPdfPage(); updatePdfControls(); } }
+function pdfZoom(delta){
+  pdfScale=Math.max(0.5,Math.min(3,pdfScale+delta));
+  document.getElementById('pdfZoomVal').textContent=Math.round(pdfScale*100)+'%';
+  renderPdfPage();
+}
+function pdfDownload(){
+  if(!currentPdfBookId||!BOOK_PDFS[currentPdfBookId]){ notify('Không có file PDF để tải!','error'); return; }
+  const books=ls('books')||[];
+  const b=books.find(x=>x.id===currentPdfBookId);
+  const data=b64ToUint8(BOOK_PDFS[currentPdfBookId]);
+  const blob=new Blob([data],{type:'application/pdf'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=`xem-truoc-${b?b.title.replace(/\s+/g,'-'):'sach'}.pdf`;
+  a.click(); URL.revokeObjectURL(url);
+  notify('Đang tải PDF... 📥','success');
+}
+function closePdfModal(){
+  document.getElementById('pdfModal').classList.remove('open');
+  pdfDoc=null;
+  // Restore canvas wrap
+  const wrap=document.getElementById('pdfCanvasWrap');
+  if(wrap && !wrap.querySelector('#pdfCanvas')){
+    wrap.innerHTML=`<div class="pdf-loading" id="pdfLoading" style="display:none"><div class="pdf-spinner"></div><span>Đang tải PDF...</span></div><canvas id="pdfCanvas" style="display:none"></canvas>`;
+  }
+}
+
+// =================== INIT ===================
+initData();
+</script>
+</body>
+</html>
