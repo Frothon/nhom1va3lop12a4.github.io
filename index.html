@@ -380,7 +380,7 @@ tr:hover td{background:rgba(212,168,83,.02);}
       <div class="fg"><label>Tên Đăng Nhập / Email</label><input type="text" id="loginUser" value="admin" placeholder="admin hoặc email"></div>
       <div class="fg"><label>Mật Khẩu</label><input type="password" id="loginPass" value="123" placeholder="••••••••"></div>
       <button class="btn" onclick="doLogin()">🔓 Đăng Nhập</button>
-      
+      <div class="demo-hint"><strong>Admin:</strong> admin / 123 &nbsp;|&nbsp; <strong>Học sinh:</strong> student / student123</div>
     </div>
     <div id="registerForm" style="display:none">
       <div style="font-size:9.5px;color:var(--gold);font-weight:700;letter-spacing:.8px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid rgba(212,168,83,.12)">📋 Thông Tin Học Sinh</div>
@@ -405,7 +405,7 @@ tr:hover td{background:rgba(212,168,83,.02);}
 <nav>
   <div class="nlogo" onclick="showPage('home')">
     <div class="nlogo-ico">📚</div>
-    <div class="nlogo-txt"><div class="nm">THƯ VIỆN</div><div class="ns">Trường THPT Nguyễn Hữu Cảnh</div></div>
+    <div class="nlogo-txt"><div class="nm">THƯ VIỆN</div><div class="ns">Trường Học</div></div>
   </div>
   <div class="nlinks">
     <div class="nlink active" onclick="showPage('home')" id="nav-home">🏠 Trang Chủ</div>
@@ -583,9 +583,9 @@ tr:hover td{background:rgba(212,168,83,.02);}
       <tr><td>Làm mất sách</td><td class="famt">150% giá sách</td><td class="famt">150% giá sách</td><td style="font-size:11px;color:var(--text3)">+ Tạm đình chỉ 3 tháng</td></tr>
       <tr><td>Vi phạm nội quy</td><td class="famt">20.000 đ/lần</td><td class="famt">20.000 đ/lần</td><td style="font-size:11px;color:var(--text3)">Lần 3+: tạm đình chỉ</td></tr>
     </tbody></table>
-    <div style="margin-top:11px;font-size:12px;color:var(--text3);line-height:1.7;border-top:1px solid rgba(192,74,90,.1);padding-top:9px">💡 Nợ phạt quá <strong style="color:var(--red2)">200.000 đ</strong> → tạm khóa quyền mượn. Nộp phạt tại <strong style="color:var(--gold2)">Phòng Thư Viện – Tầng 1 Sau Hội Trường</strong>.</div>
+    <div style="margin-top:11px;font-size:12px;color:var(--text3);line-height:1.7;border-top:1px solid rgba(192,74,90,.1);padding-top:9px">💡 Nợ phạt quá <strong style="color:var(--red2)">200.000 đ</strong> → tạm khóa quyền mượn. Nộp phạt tại <strong style="color:var(--gold2)">Phòng Thư Viện – Tầng 2, Nhà A</strong>.</div>
   </div>
-  <div style="background:rgba(42,74,138,.08);border:1px solid rgba(42,74,138,.18);border-radius:12px;padding:12px 16px;font-size:12.5px;color:var(--text2);line-height:1.8;display:flex;gap:9px"><span>ℹ️</span><div>Liên hệ: <strong style="color:var(--gold2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f4809c81829d919ab48086819b9a93da919081da829a">[email&#160;protected]</a></strong> | ĐT: <strong style="color:var(--gold2)"></strong></div></div>
+  <div style="background:rgba(42,74,138,.08);border:1px solid rgba(42,74,138,.18);border-radius:12px;padding:12px 16px;font-size:12.5px;color:var(--text2);line-height:1.8;display:flex;gap:9px"><span>ℹ️</span><div>Liên hệ: <strong style="color:var(--gold2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f4809c81829d919ab48086819b9a93da919081da829a">[email&#160;protected]</a></strong> | ĐT: <strong style="color:var(--gold2)">028-3838-xxxx ext.201</strong></div></div>
 </div>
 
 <!-- PROFILE -->
@@ -691,7 +691,7 @@ tr:hover td{background:rgba(212,168,83,.02);}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ══════════════════════════════════════════════
 // CONSTANTS
 // ══════════════════════════════════════════════
@@ -1536,4 +1536,8 @@ function renderAdminUsers(){
 function delUser(id){if(!confirm('Xóa người dùng?'))return;ls('users',(ls('users')||[]).filter(u=>u.id!==id));renderAdminUsers();}
 function makeAdmin(id){if(!confirm('Cấp quyền Admin?'))return;const u=ls('users');const i=u.findIndex(x=>x.id===id);u[i].role='admin';ls('users',u);renderAdminUsers();notify('Cấp quyền Admin 👑','ok');}
 
-// ═══════════════════════════════�
+// INIT
+initData();
+</script>
+</body>
+</html>
